@@ -6,6 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title>Sr Izan's website.</title>
+  <!--Scripts and styles-->
+<script>
+  function myFunction() {
+     var element = document.body;
+     element.classList.toggle("dark-mode");
+  }
+  </script>
+  <style>
+  body {
+  background-color: white;
+  color: black;
+  font-size: 25px;
+  overflow: hidden;
+}
+.corner{
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+}
+
+.dark-mode {
+  background-color: #23272A;
+  color: white;
+}
+.lefttorighttext{
+position: absolute;
+white-space: nowrap;
+animation: floatText 5s infinite alternate ease-in-out;
+}
+
+@-webkit-keyframes floatText{
+from {
+left: 00%;
+}
+
+to {
+/* left: auto; */
+left: 100%;
+}
+}
+</style>
   </head>
 <body>
 
@@ -15,46 +56,6 @@
 </div>
 
 <div class="corner"><button onclick="myFunction()">Cambiar a modo oscuro</button></div>
-<!--Scripts and styles-->
-<script>
-        function myFunction() {
-           var element = document.body;
-           element.classList.toggle("dark-mode");
-        }
-        </script>
-        <style>
-        body {
-        background-color: white;
-        color: black;
-        font-size: 25px;
-        overflow: hidden;
-      }
-      .corner{
-        position: absolute;
-        right: 0px;
-        bottom: 0px;
-      }
-      
-      .dark-mode {
-        background-color: #23272A;
-        color: white;
-      }
-      .lefttorighttext{
-    position: absolute;
-    white-space: nowrap;
-    animation: floatText 5s infinite alternate ease-in-out;
-}
 
-@-webkit-keyframes floatText{
-  from {
-    left: 00%;
-  }
-
-  to {
-    /* left: auto; */
-    left: 100%;
-  }
-}
-      </style>
 </body>
 </html>
