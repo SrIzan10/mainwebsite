@@ -7,4 +7,5 @@ Down here I'll put all the changelogs starting from [here](https://github.com/Sr
 
 # Changelog
 ---
+Add a Go to home (in spanish) in the [Bask](https://srizan.ml/bask) guide
 Obviously, Add README.md. (1/3/21)
