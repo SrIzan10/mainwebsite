@@ -31,12 +31,13 @@
   console.log(x);
   var element = document.getElementsByClassName('home-intro');
   document.getElementById("homeintro").style.height="1000px";
-  //document.getElementById("homeintro").style.backgroundImage = 
-  //"url("+images[x] +")";
-  //              }
+  document.getElementById("homeintro").style.backgroundImage = 
+  "url("+images[x] +")";
+                }
   console.log(element);
   element[0].style["background-image"] = "url("+ images[x] + ") no-repeat;";
 }
+
 document.addEventListener("DOMContentLoaded", randomImage);
   </script>
   <style>
