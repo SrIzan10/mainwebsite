@@ -14,6 +14,30 @@
      var element = document.body;
      element.classList.toggle("dark-mode");
   }
+  function randomImage(){
+  var images = [
+   'content/background/bliss.jpg',
+   'content/background/bridge.jpg',
+   'content/background/connections.jpg',
+   'content/background/debian.svg',
+   'content/background/forest.jpg',
+   'content/background/lookdown.jpg',
+   'content/background/macos.jpg',
+   'content/background/mountain.jpg',
+   'content/background/waterfall.jpg',
+   'content/background/windows95setup.jpg'];
+  var size = images.length;
+  var x = Math.floor(size * Math.random());
+  console.log(x);
+  var element = document.getElementsByClassName('home-intro');
+  document.getElementById("homeintro").style.height="1000px";
+  //document.getElementById("homeintro").style.backgroundImage = 
+  //"url("+images[x] +")";
+  //              }
+  console.log(element);
+  element[0].style["background-image"] = "url("+ images[x] + ") no-repeat;";
+}
+document.addEventListener("DOMContentLoaded", randomImage);
   </script>
   <style>
   body {
@@ -31,6 +55,11 @@
   position: absolute;
   left: 0px;
   bottom: 0px;
+}
+.contact{
+  position: absolute;
+  right: 0px;
+  top: 0px;
 }
 .dark-mode {
   background-color: #23272A;
@@ -53,10 +82,19 @@ left: 100%;
 }
 }
 img { border: 0; }
+
+.home-intro{
+background-image: url("../images/1.png");
+background-color:grey;
+height:500px;
+color:white;
+text-align:center;
+}
 </style>
 </head>
 <body>
-
+<div class="home-intro show-for-medium-up" id="home-intro"></div>
+<a href="contact"><p class="contact">Contact me</p></a>
 <div class="lefttorighttext">
 <h1>Sr Izan's Website.</h1>
 </div>
