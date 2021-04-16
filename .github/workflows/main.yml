@@ -1,0 +1,21 @@
+- name: HTML5 Validator
+  # You may pin to the exact commit or the version.
+  # uses: Cyb3r-Jak3/html5validator-action@c8012a8df62da54b8babd683a38e0dd3f49fa3ae
+  uses: Cyb3r-Jak3/html5validator-action@v0.5
+  with:
+    # Path of the files to test
+    root: # optional
+    # Path of config file
+    config: # optional
+    # Extra arguments to test with
+    extra: # optional
+    # Format for logging output. Valid values: gnu,xml,json,text
+    format: # optional
+    # Logging Level. Valid values: DEBUG, INFO, WARNING. Default: WARNING
+    log_level: # optional, default is WARNING
+    # Checks css as well
+    css: # optional
+    # Files or directories to ignore in checking
+    ignore: # optional
+    # Flag that increase verbose output only used for troubleshooting the action.
+    action_debug: # optional
