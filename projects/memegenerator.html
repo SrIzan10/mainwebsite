@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" type="image/png" href="../favicon.jpg"/>
+    <link href="../css/addaptphone.css" rel="stylesheet" type="text/css">
+    <!--If it's a phone, addapt it (and maked some code in css/addaptphone.css to be future-proof)-->
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="Meme Generator" content="Meme Generator by Sr Izan (Codepen dump)" />
+    <link rel="canonical" href="https://srizan.ml/projects/memegenerator.html" />
+    <title>Sr Izan's Website</title>
+  <!--Scripts and styles-->
+<script>
+function update_text(){
+  var user_text = document.getElementById("user_text");
+  var meme_text = document.getElementById("meme_text");
+  meme_text.innerHTML = user_text.value;
+  var img = document.querySelector('img');
+  var file = document.querySelector('input[type=file]').files[0];
+  img.src =  window.URL.createObjectURL(file);
+  }
+  </script>
+  <style>
+    #meme_text {
+    background-color: transparent;
+    font-size: 40px;
+    font-family: "Impact";
+    color: white;
+    text-shadow: black 0px 0px 10px;
+    width: 600px;
+    position: absolute;
+    left: 15px;
+    top: 400px;
+}
+  </style>
+</head>
+<body>
+  <html>
+<head>
+  <title>Generador de memes (Alpha 1)</title>
+</head>
+<body>
+ Este generador (en fase alpha) te va a generar memes.
+<strong>Disclaimer: Esto no es un proyecto original. Es de Raspberry Pi Projects</strong>:   <a href="https://bit.ly/35ECKPy">Página del proyecto (Raspberry Pi Projects) </a>Ah! también. <strong>Nota: todas las imágenes se guardan en tu ordenador; este programa no sube nada a Internet. (alias Client Side Tool)</strong>
+<form> 
+  Texto del meme: <input type="text" id="user_text" maxlength="70" oninput="update_text()"><p>
+  Selecciona una imagen: <input type="file" id="user_picture" onchange="update_image()">
+</form> 
+  <div id="meme_text">Texto de ejemplo aquí</div>
+  <div id="meme_picture"><img src="" height="500" width="600"></div>
+</body>
+</html>
+
+</body>
+</html>
