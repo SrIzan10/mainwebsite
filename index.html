@@ -11,39 +11,49 @@
     <title>Sr Izan's website.</title>
   <!--Scripts and styles-->
 <script>
-  function myFunction() {
-     var element = document.body;
-     element.classList.toggle("dark-mode");
-  }
-  function changeImg(imgNumber)	{
-		var myImages = 
-    ['content/background/bliss.jpg',
-   'content/background/bridge.jpg',
-   'content/background/connections.png',
-   'content/background/debian.svg',
-   'content/background/forest.jpg',
-   'content/background/lookdown.jpg',
-   'content/background/macos.jpg',
-   'content/background/mountain.jpg',
-   'content/background/windows95setup.png'];
-			var imgShown = document.body.style.backgroundImage;
-			var newImgNumber =Math.floor(Math.random()*myImages.length);
-			document.body.style.backgroundImage = 'url('+myImages[newImgNumber]+')';
-		}
-		window.onload=changeImg;
-
-
-
-document.addEventListener("DOMContentLoaded", randomImage);
-  </script>
-  <style>
-  body {
-  background-color: white;
-  color: black;
-  font-size: 25px;
-  overflow: hidden;
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap');
+/* Menu style start */
+nav ul {
+  list-style-type: none;
+  background-color: #3e5e45;
+  border: 4px solid #111111;
+  border-radius: 10px;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding: 16px;
 }
-.corner{
+nav ul li {
+  text-align: center;
+  display: inline;
+  border-right: 2px solid #111111;
+  padding-right: 8px;
+  padding-left: 8px;
+}
+nav ul li:last-child {
+  border-right: none;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #111111;
+}
+body {
+  background-color:#3b444a;
+}
+/* Menu style end */
+.idostuff {
+    margin-top: 220px;
+}
+
+#h1idostuff {
+  text-align: center;
+  font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+
+
+.corner {
   position: absolute;
   right: 0px;
   bottom: 0px;
@@ -53,31 +63,25 @@ document.addEventListener("DOMContentLoaded", randomImage);
   left: 0px;
   bottom: 0px;
 }
-.contact{
+.contact {margin-top: 220px;
   position: absolute;
   right: 0px;
-  top: 0px;
 }
 .dark-mode {
   background-color: #23272A;
   color: white;
 }
-.lefttorighttext{
+.lefttorighttext {
 position: absolute;
 white-space: nowrap;
 animation: floatText 5s infinite alternate ease-in-out;
-}
-
-@-webkit-keyframes floatText{
-from {
-left: 00%;
 }
 
 to {
 /* left: auto; */
 left: 100%;
 }
-}
+
 img { border: 0; }
 
 /*.home-intro{
@@ -87,29 +91,28 @@ height:500px;
 color:white;
 text-align:center;
 }*/
-.bg {
-  background-attachment:fixed; 
-  /*background-repeat: no-repeat;*/
-  }
 </style>
 </head>
-<body class="bg">
+<body>
 <script async src="https://arc.io/widget.min.js#FPeKJpXk"></script>
-<div class="home-intro show-for-medium-up" id="home-intro"></div>
-<a href="contact"><p class="contact">Contact me</p></a>
+<nav>
+  <ul>
+    <li><a href="blog"><p style="display:inline-block;">Blog</p></a></li>
+    <li><a href="https://dl.srizan.ml"><p style="display:inline-block;">Downloads</p></a></li>
+    <li><a href="projects/"><p style="display:inline-block;">Projects</p></a></li>
+    <li><a href="contact"><p style="display:inline-block;">Contact me!</p></a></li>
+    <a href="github.com/SrIzan10"><i class="fab fa-github"></i></a>
+  </ul>
+</nav>
+<header class="idostuff"><h1 id="h1idostuff">I do stuff</h1></header>
+<!--<a href="contact"><p class="contact">Contact me</p></a>-->
 
-<marquee behavior="alternate" direction="right"><h1>Sr Izan's Website.</h1></marquee>
+<!--<marquee behavior="alternate" direction="right"><h1>Sr Izan's Website.</h1></marquee>-->
 
-<!--I'm questioning my life rn-->
-<br>
-<br>
-<br>
-<br>
-<br>
-<a href="blog" style="text-decoration: none;"><p style="text-align: center; color: #a03131; font-size: 40px;">Blog</p></a>
+<!--<a href="blog" style="text-decoration: none;"><p style="text-align: center; color: #a03131; font-size: 40px;">Blog</p></a>
 <a href="downloads" style="text-decoration: none;"><p style="text-align: center; color: #2E38A8; font-size: 40px;">Downloads</p></a>
-<a href="projects/" style="text-decoration: none;"><p style="text-align: center; color: #FF0000; font-size: 40px;">Projects</p></a>
-<div class="corner"><button onclick="myFunction()">Toggle dark mode</button></div>
+<a href="projects/" style="text-decoration: none;"><p style="text-align: center; color: #FF0000; font-size: 40px;">Projects</p></a>-->
+
 <!--<div class="htmlapprovalcorner"><a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fsrizan.ml%2F" target="_blank" rel="noopener" rel="noreferrer"><img alt="HTML5 badge" src="content/img/badge_html5.svg" width="88" height="31"></a></div>-->
 
 </body>

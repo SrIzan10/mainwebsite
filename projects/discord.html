@@ -3,7 +3,7 @@
   <head>
     <link rel="icon" type="image/png" href="../favicon.jpg"/>
     <link href="../css/addaptphone.css" rel="stylesheet" type="text/css">
-    <!--If it's a phone, addapt it (and maked some code in css/addaptphone.css to be future-proof)-->
+    <!--If it's a phone, addapt it (and made some code in css/addaptphone.css to be future-proof)-->
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="DiscordJS" content="DiscordJS projects" />
@@ -13,9 +13,47 @@
 <script>
   </script>
   <style>
+    /* Menu style start */
+nav ul {
+  list-style-type: none;
+  background-color: #3e5e45;
+  border: 4px solid #111111;
+  border-radius: 10px;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding: 16px;
+}
+nav ul li {
+  text-align: center;
+  display: inline;
+  border-right: 2px solid #111111;
+  padding-right: 8px;
+  padding-left: 8px;
+}
+nav ul li:last-child {
+  border-right: none;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #111111;
+}
+body {
+  background-color:#3b444a;
+}
+/* Menu style end */
   </style>
 </head>
 <body>
+  <script async src="https://arc.io/widget.min.js#FPeKJpXk"></script>
+  <nav>
+    <ul>
+      <li><a href="blog"><p style="display:inline-block;">Blog</p></a></li>
+      <li><a href="https://dl.srizan.ml"><p style="display:inline-block;">Downloads</p></a></li>
+      <li><a href="projects/"><p style="display:inline-block;">Projects</p></a></li>
+      <li><a href="contact"><p style="display:inline-block;">Contact me!</p></a></li>
+      <a href="github.com/SrIzan10"><i class="fab fa-github"></i></a>
+    </ul>
+  </nav>
 <a href="bask">Bask (spanish bot)</a>
 <a href="#">Bask Radio</a>
 <a href="#">HammerBot</a>
