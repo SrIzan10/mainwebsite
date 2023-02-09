@@ -1,0 +1,10 @@
+body {
+    background-color: #2b2c38;
+    color:white;
+    font-family: 'JetBrains Mono', monospace;
+    text-align: center;
+}
+
+a {
+    color: rgb(80, 187, 223);
+}
