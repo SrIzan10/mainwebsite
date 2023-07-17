@@ -18,7 +18,13 @@ body {
 }
 
 .icons {
-  display: inline;
-  position: absolute;
-  bottom: 0;
+  align-self: flex-end;
+}
+
+.icons * {
+  margin-right: 20px;
+}
+
+.icons *:last-child {
+  margin-right: 0;
 }
