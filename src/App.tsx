@@ -10,7 +10,7 @@ function App() {
   return (
     <div>
       <div className='aboutMeBox'>
-        <img src='https://github.com/SrIzan10.png' alt='main profile picture' height='200px' />
+        <img src='https://github.com/SrIzan10.png' alt='main profile picture' height='200px' style={{ borderRadius: '70px' }} />
         <p>I'm a hobbyist developer and osu! player based on Spain who loves to open-source and to work on teams.</p>
         <p>Stalk me on social media:</p>
         <div className='icons'>
