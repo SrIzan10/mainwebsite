@@ -1,0 +1,14 @@
+.cardBox {
+    width: 40vw;
+    text-align: center;
+}
+
+.actions {
+    float: right
+}
+
+@media (max-width: 800px) {
+    .cardBox {
+        width: 100vw;
+    }
+}

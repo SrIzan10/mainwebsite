@@ -1,3 +1,5 @@
+/* Yes, this is a kinda unmodified index.css file from the vite template. I like the colors and stuff so I'll keep it. */
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -5,7 +7,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #1d1d1d;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
