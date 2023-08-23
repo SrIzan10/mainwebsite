@@ -1,4 +1,3 @@
-import yaml from 'js-yaml'
 import { glob } from 'glob'
 import * as fs from 'node:fs'
 import gm from 'gray-matter'
