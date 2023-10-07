@@ -4,8 +4,35 @@ import { Helmet } from 'react-helmet';
 import blogPosts from '../blogPosts.json'
 import BlogPostCard from "./BlogPostCard.tsx";
 import {BlogNavBar} from "./BlogNavBar.tsx";
+import {faRss, faAtom} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {
+    SpeedDial,
+    SpeedDialAction
+} from "@mui/material";
+import React from "react";
+import {DataObject} from "@mui/icons-material";
+
+const actions = [
+    { icon: <FontAwesomeIcon icon={faRss} />, name: 'RSS' },
+    { icon: <DataObject />, name: 'JSON' },
+    { icon: <FontAwesomeIcon icon={faAtom} />, name: 'Atom' }
+];
 
 function Blog() {
+    const handleChange = (event: string) => {
+        switch (event) {
+            case 'RSS':
+                window.location.href = '/blog/rss.xml'
+                break;
+            case 'JSON':
+                window.location.href = '/blog/feed.json'
+                break;
+            case 'Atom':
+                window.location.href = '/blog/atom.xml'
+                break;
+        }
+    }
     return (
         <div>
             <Helmet>
@@ -19,6 +46,22 @@ function Blog() {
                         <BlogPostCard {...post} />
                     );
                 })}
+            </div>
+            <div className="bottomRight">
+                <SpeedDial
+                    ariaLabel="SpeedDial basic example"
+                    sx={{ position: 'absolute', bottom: 16, right: 16 }}
+                    icon={<FontAwesomeIcon icon={faRss} />}
+                >
+                    {actions.map((action) => (
+                        <SpeedDialAction
+                            key={action.name}
+                            icon={action.icon}
+                            tooltipTitle={action.name}
+                            onClick={() => handleChange(action.name)}
+                        />
+                    ))}
+                </SpeedDial>
             </div>
         </div>
     );

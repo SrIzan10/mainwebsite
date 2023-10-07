@@ -25,3 +25,5 @@ dist-ssr
 
 # various stuff
 blogPosts.json
+public/blog/*.xml
+public/blog/feed.json
