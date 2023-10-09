@@ -1,5 +1,5 @@
 /* Yes, this is a kinda unmodified index.css file from the vite template. I like the colors and stuff so I'll keep it. */
-
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

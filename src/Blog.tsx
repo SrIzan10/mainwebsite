@@ -6,12 +6,9 @@ import BlogPostCard from "./BlogPostCard.tsx";
 import {BlogNavBar} from "./BlogNavBar.tsx";
 import {faRss, faAtom} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {
-    SpeedDial,
-    SpeedDialAction
-} from "@mui/material";
-import React from "react";
-import {DataObject} from "@mui/icons-material";
+import SpeedDial from '@mui/material/SpeedDial';
+import SpeedDialAction from '@mui/material/SpeedDialAction';
+import DataObject from "@mui/icons-material/DataObject";
 
 const actions = [
     { icon: <FontAwesomeIcon icon={faRss} />, name: 'RSS' },
