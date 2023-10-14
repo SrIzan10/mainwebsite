@@ -40,3 +40,9 @@
         height: 60px;
     }
 }
+
+@media (prefers-color-scheme: light) {
+    .navBar {
+        background-color: #f2f2f2;
+    }
+}

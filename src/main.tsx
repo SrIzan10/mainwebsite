@@ -22,14 +22,19 @@ const router = createBrowserRouter([
     }
 ]);
 
+const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
 const darkTheme = createTheme({
     palette: {
-        mode: 'dark',
+        mode: prefersDarkMode.matches ? 'dark' : 'light',
         background: {
-            default: '#0d0d0d',
-            paper: '#0d0d0d'
+            default: prefersDarkMode.matches ? '#0d0d0d' : '#fafafa',
+            paper: prefersDarkMode.matches ? '#0d0d0d' : '#fafafa',
         }
     },
+});
+
+prefersDarkMode.addEventListener('change', () => {
+    location.reload()
 });
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
