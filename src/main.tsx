@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Blog from "./Blog.tsx";
 import {BlogPost} from "./BlogPost.tsx";
+import AnalyticsNotice from "./AnalyticsNotice.tsx";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +41,7 @@ prefersDarkMode.addEventListener('change', () => {
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
       <ThemeProvider theme={darkTheme}>
+          <AnalyticsNotice />
           <RouterProvider router={router} />
       </ThemeProvider>
   </React.StrictMode>,
