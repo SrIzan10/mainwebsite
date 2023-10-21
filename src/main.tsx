@@ -7,6 +7,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Blog from "./Blog.tsx";
 import {BlogPost} from "./BlogPost.tsx";
 import AnalyticsNotice from "./AnalyticsNotice.tsx";
+import Collab from './Collab.tsx';
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
     {
         path: "/blog/:id",
         element: <BlogPost />
+    },
+    {
+        path: '/collab',
+        element: <Collab />
     }
 ]);
 
