@@ -31,7 +31,6 @@ export default function AnalyticsNotice() {
 
     const [modalOpen, setModalOpen] = React.useState(false);
     const handleModalOpen = () => setModalOpen(true);
-    const handleModalClose = () => setModalOpen(false);
     const handleClose = (_event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
             return;
