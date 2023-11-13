@@ -27,7 +27,7 @@ export function BlogPost() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const jsonFetch = await import('../blogPosts.json');
+            const jsonFetch = await import('../../blogPosts.json');
             const jsonDataArray = jsonFetch.default;
             const filteredPost = jsonDataArray.filter((post) => post.id === id)[0];
             if (filteredPost) {

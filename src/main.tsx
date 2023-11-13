@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
+import App from './pages/App.tsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import Blog from "./Blog.tsx";
-import {BlogPost} from "./BlogPost.tsx";
-import AnalyticsNotice from "./AnalyticsNotice.tsx";
-import Collab from './Collab.tsx';
+import Blog from "./pages/Blog.tsx";
+import { BlogPost } from "./components/BlogPost.tsx";
+import AnalyticsNotice from "./components/AnalyticsNotice.tsx";
+import Collab from './pages/Collab.tsx';
 
 const router = createBrowserRouter([
     {

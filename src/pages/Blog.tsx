@@ -1,11 +1,10 @@
-// Blog.js
 import './Blog.css';
 import { Helmet } from 'react-helmet';
-import blogPosts from '../blogPosts.json'
-import BlogPostCard from "./BlogPostCard.tsx";
-import {BlogNavBar} from "./BlogNavBar.tsx";
-import {faRss, faAtom} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import blogPosts from '../../blogPosts.json'
+import BlogPostCard from "../components/BlogPostCard.tsx";
+import { BlogNavBar } from "../components/BlogNavBar.tsx";
+import { faRss, faAtom } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import DataObject from "@mui/icons-material/DataObject";
