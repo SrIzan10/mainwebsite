@@ -1,10 +1,28 @@
+import { useEffect, useState } from 'react';
 import './BlogNavBar.css'
 
 export function BlogNavBar(props: Props) {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        let prevScrollpos = window.scrollY;
+
+        const handleScroll = () => {
+            const currentScrollPos = window.scrollY;
+            setIsScrolled(prevScrollpos < currentScrollPos);
+            prevScrollpos = currentScrollPos;
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
     return (
-        <div className={'navBar'}>
+        <div className={`navBar ${isScrolled ? 'hide' : ''}`}>
             <div className="iconContainer">
-                <img src="https://github.com/SrIzan10.png" alt="main profile picture" height="50vh" />
+                <img src="/pfp.webp" alt="main profile picture" height="50vh" />
                 <p>{props.title || 'Sr Izan\'s blog'}</p>
             </div>
             <a href={props.title ? '/blog' : '/'} className="backHomeLink">Go back {props.title ? 'to posts' : 'home'}</a>

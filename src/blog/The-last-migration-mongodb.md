@@ -5,8 +5,6 @@ description: Here I ramble about the last service migration I did, MongoDB, and 
 date: 12/11/2023
 ---
 
-# The last service migration: MongoDB
-
 ## Introduction
 
 So, the last few months I've been migrating services from my good old Raspberry Pi into my new HP server and the last service I migrated was MongoDB.
@@ -21,7 +19,7 @@ My database instance is on Docker with a replica set of 1 node (itself) so [Pris
 
 My idea is to add the HP server as a secondary replica and then promote it to be the primary one, but I don't know if that will work, so we need to test some stuff.
 
-I first created 2 docker containers on my [main `Ryzen` machine](https://gist.github.com/SrIzan10/50bc2ba689a4cc43bcbac2799cc733c9)'s WSL Ubuntu instance.
+I first created 2 docker containers on my [main Ryzen machine](https://gist.github.com/SrIzan10/50bc2ba689a4cc43bcbac2799cc733c9)'s WSL Ubuntu instance.
 
 I created a `docker-compose.yml` file with the following content:
 

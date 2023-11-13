@@ -1,8 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
 .blogPostContent {
     margin-top: 100px;
     z-index: 0;
     padding: 0 20vw 0 20vw;
     line-height: 2;
+}
+
+code {
+    font-family: 'JetBrains Mono', monospace;
+}
+.codeHighlighter {
+    font-family: 'JetBrains Mono', monospace;
+    shadow: 0;
 }
 
 @media (max-width: 900px) {
