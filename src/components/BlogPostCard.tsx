@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat.js'
-import './BlogPostCard.css'
+import '../css/BlogPostCard.css'
 import { Button, CardActions } from "@mui/material";
 import {Link} from "react-router-dom";
 dayjs.extend(customParseFormat)

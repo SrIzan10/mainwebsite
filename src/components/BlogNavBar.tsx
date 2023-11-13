@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './BlogNavBar.css'
+import '../css/BlogNavBar.css'
 import { Link } from 'react-router-dom';
 
 export function BlogNavBar(props: Props) {

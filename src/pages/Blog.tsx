@@ -1,4 +1,4 @@
-import './Blog.css';
+import './css/Blog.css';
 import { Helmet } from 'react-helmet';
 import blogPosts from '../../blogPosts.json'
 import BlogPostCard from "../components/BlogPostCard.tsx";
