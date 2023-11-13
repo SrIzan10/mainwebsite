@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './BlogNavBar.css'
+import { Link } from 'react-router-dom';
 
 export function BlogNavBar(props: Props) {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -25,7 +26,7 @@ export function BlogNavBar(props: Props) {
                 <img src="/pfp.webp" alt="main profile picture" height="50vh" />
                 <p>{props.title || 'Sr Izan\'s blog'}</p>
             </div>
-            <a href={props.title ? '/blog' : '/'} className="backHomeLink">Go back {props.title ? 'to posts' : 'home'}</a>
+            <Link to={props.title ? '/blog' : '/'} className="backHomeLink">Go back {props.title ? 'to posts' : 'home'}</Link>
         </div>
     )
 }
