@@ -11,7 +11,7 @@ import Image from "next/image";
 
 export default async function Page({ params }: { params: { id: string } }) {
     const id = parseInt(params.id);
-    const jsonDataArray = JSON.parse(await fs.readFile('../blogPosts.json', 'utf-8')) as BlogPostJSONResponse[]
+    const jsonDataArray = JSON.parse(await fs.readFile('./blogPosts.json', 'utf-8')) as BlogPostJSONResponse[]
     let jsonData = {
         id: 0,
         title: '',
