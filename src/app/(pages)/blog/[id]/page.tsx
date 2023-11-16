@@ -10,8 +10,8 @@ import React from "react";
 import Image from "next/image";
 
 export default async function Page({ params }: { params: { id: string } }) {
+    const jsonDataArray: BlogPostJSONResponse[] = JSON.parse(await fs.readFile(process.cwd() + '/blogPosts.json', 'utf-8'));
     const id = parseInt(params.id);
-    const jsonDataArray = JSON.parse(await fs.readFile('./blogPosts.json', 'utf-8')) as BlogPostJSONResponse[]
     let jsonData = {
         id: 0,
         title: '',
@@ -64,7 +64,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                     },
                     img(props) {
                         // eslint-disable-next-line jsx-a11y/alt-text
-                        return <Image alt={props.alt || 'Image'} src={props.src!} />
+                        return <img {...props} style={{ maxWidth: '100%' }} />
                     }
                 }}>
                     {jsonData.fileContent}

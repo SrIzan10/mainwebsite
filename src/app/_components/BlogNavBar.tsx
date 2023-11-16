@@ -4,6 +4,8 @@
 import { useEffect, useState } from 'react';
 import '../_css/BlogNavBar.css'
 import Link from 'next/link';
+import Pfp from '../../../public/pfp.webp';
+import Image from 'next/image';
 
 export default function BlogNavBar(props: Props) {
     const [isScrolled, setIsScrolled] = useState(false);

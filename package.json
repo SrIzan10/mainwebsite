@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
+    "dev": "node src/blogPostGenerator.js && next dev",
     "build": "node src/blogPostGenerator.js;next build",
     "start": "node src/blogPostGenerator.js;next start",
     "lint": "next lint"
