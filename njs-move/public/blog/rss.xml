@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Sr Izan's Blog</title>
+        <link>https://srizan.dev/blog</link>
+        <description>My little donowall place on the net</description>
+        <lastBuildDate>Wed, 15 Nov 2023 14:55:52 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <image>
+            <title>Sr Izan's Blog</title>
+            <url>https://srizan.dev/pfp.png</url>
+            <link>https://srizan.dev/blog</link>
+        </image>
+        <copyright>Copyleft 2023, Sr Izan</copyright>
+        <atom:link href="https://srizan.dev/blog/rss.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title><![CDATA[My tales of MongoDB migration]]></title>
+            <link>https://srizan.dev/blog/2</link>
+            <guid>https://srizan.dev/blog/2</guid>
+            <pubDate>Sat, 11 Nov 2023 23:00:00 GMT</pubDate>
+            <description><![CDATA[Here I ramble about the last service migration I did, MongoDB, and all the difficulties that came with it.]]></description>
+            <content:encoded><![CDATA[<h2>Introduction</h2>
+<p>So, the last few months I&#39;ve been migrating services from my good old Raspberry Pi into my new HP server and the last service I migrated was MongoDB.</p>
+<p>I&#39;ve been using MongoDB for a while now and I&#39;ve been using it for a few things, like my discord bots, <a href="https://github.com/SrIzan10/webhooks-ui">webhooks-ui</a> and probably other projects I don&#39;t remember right now.</p>
+<p>So, let&#39;s get started!</p>
+<h2>Testing the plan</h2>
+<p>My database instance is on Docker with a replica set of 1 node (itself) so <a href="https://www.prisma.io/">Prisma</a> works.</p>
+<p>My idea is to add the HP server as a secondary replica and then promote it to be the primary one, but I don&#39;t know if that will work, so we need to test some stuff.</p>
+<p>I first created 2 docker containers on my <a href="https://gist.github.com/SrIzan10/50bc2ba689a4cc43bcbac2799cc733c9">main Ryzen machine</a>&#39;s WSL Ubuntu instance.</p>
+<p>I created a <code>docker-compose.yml</code> file with the following content:</p>
+<pre><code class="language-yml">version: &quot;3.8&quot;
+services:
+  mongo1:
+    image: mongo:4.4.17-rc0-focal
+    container_name: mongo1
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo1:/data/db
+    command: mongod --replSet mongoset
+    networks:
+      - mongo
+  mongo2:
+    image: mongo:4.4.17-rc0-focal
+    container_name: mongo2
+    restart: always
+    ports:
+      - 27018:27017
+    volumes:
+      - ./mongo2:/data/db
+    command: mongod --replSet mongoset
+    networks:
+      - mongo
+networks:
+  mongo:
+</code></pre>
+<p>and ran it with <code>docker compose up -d</code>.</p>
+<p>I went to connect with MongoDB Compass and it didn&#39;t work for some reason. I asked GPT and nothing. It looks like it accepted the connection but it won&#39;t connect, so I installed <code>mongosh</code> and tried to connect with that.</p>
+<pre><code class="language-bash">$ mongosh mongodb://localhost:27017
+</code></pre>
+<p>...and it worked! That didn&#39;t make any sense, but okay, we can work with it.</p>
+<p>I then connected to the <code>mongo1</code> instance and ran the following commands:</p>
+<pre><code class="language-bash">&gt; rs.initiate()
+</code></pre>
+<p>and it worked, but only that same database connected. Before adding the second database to the replica, I went ahead and pinged it from the first container (just to check if the network configuration worked):</p>
+<pre><code class="language-bash">docker exec mongo1 sh -c &quot;rm /bin/ping;apt update;apt install inetutils-ping -y;ping mongo2&quot;
+</code></pre>
+<p>I removed /bin/ping because I tried to transfer the binary from WSL to the container but it still needed some libraries and I didn&#39;t want to bother, so I just installed the package.</p>
+<p>It worked, so I went ahead and added the second database to the replica set:</p>
+<pre><code class="language-bash">&gt; rs.add(&quot;mongo2&quot;)
+</code></pre>
+<p>After waiting for it, the second database connected and everything was working fine. Let&#39;s create a collection and some documents on the primary replica (mongo1):</p>
+<pre><code class="language-bash">&gt; use test
+&gt; db.createCollection(&quot;test&quot;)
+&gt; db.test.insertOne({ name: &quot;test&quot; })
+</code></pre>
+<p>and then, let&#39;s check if it&#39;s on the second replica (mongo2):</p>
+<pre><code class="language-bash">$ mongosh mongodb://localhost:27017
+</code></pre>
+<pre><code class="language-bash">&gt; use test
+&gt; db.getMongo().setReadPref(&quot;secondaryPreferred&quot;)
+&gt; db.test.find()
+</code></pre>
+<p>and, yeah, that worked.</p>
+<p>I don&#39;t really know if ORMs will read when connecting to the second replica, but for now it&#39;s fine as the main plan is on track.<br>So, to promote I connected to the primary replica (mongo1) and ran the following command:</p>
+<pre><code class="language-bash">&gt; rs.stepDown()
+</code></pre>
+<p>And that worked! Woo! The second replica is now the primary one. We can now start <em>drum rolls please</em>:</p>
+<h2>The migration</h2>
+<p>This is it. We&#39;re doing it.</p>
+<p>I went ahead and created a new docker-compose file on my server with the following content:</p>
+<pre><code class="language-yml">version: &quot;3.8&quot;
+services:
+    mongo:
+        image: mongo:4.4.17-rc0-focal
+        container_name: mongodb
+        restart: unless-stopped
+        ports:
+            - 27017:27017
+        volumes:
+            - ./mongo:/data/db
+        command: mongod --replSet rs0
+</code></pre>
+<p>After deploying the stack, I connected using mongosh to the primary db and ran the following command:</p>
+<pre><code class="language-bash">&gt; rs.add(&quot;ip&quot;)
+</code></pre>
+<p>and after waiting for a while it looked like it worked. I then connected to the new database and ran the following command to check if the replica cloned fine:</p>
+<pre><code class="language-bash">&gt; db.getMongo().setReadPref(&quot;secondaryPreferred&quot;)
+</code></pre>
+<p>and let&#39;s just let the results speak for themselves:</p>
+<pre><code class="language-bash">rs0 [direct: secondary] test&gt; show dbs
+# author&#39;s note: some dbs are redacted for privacy reasons 
+admin         80.00 KiB
+api           80.00 KiB
+ava           40.00 KiB
+bask         168.00 KiB
+config       144.00 KiB
+local        348.00 KiB
+vinci        428.00 KiB
+rs0 [direct: secondary] test&gt; use vinci
+switched to db vinci
+rs0 [direct: secondary] vinci&gt; show tables
+afk
+birthdays
+chatgpt
+giveaways-enters
+giveaways-message
+padyama
+suggestions
+twitter
+warns
+youtube
+rs0 [direct: secondary] vinci&gt; db.afk.find()
+[
+  {
+    _id: ObjectId(&quot;sadfsad fsadfsdf&quot;),
+    id: &#39;redacted&#39;,
+    reason: &#39;redacted&#39;,
+    __v: 0
+  },
+  {
+    _id: ObjectId(&quot;asdfsadfadf&quot;),
+    id: &#39;redacted&#39;,
+    reason: &#39;readacted&#39;,
+    __v: 0
+  }
+]
+rs0 [direct: secondary] vinci&gt;
+</code></pre>
+<p>Nice. let&#39;s now try to write something to the database from Vinci:<br><img src="https://img.srizan.dev/Discord_a2iXkWYxwn.png" alt=""><br>That just worked and we can see it on the secondary replica:</p>
+<pre><code class="language-bash">rs0 [direct: secondary] vinci&gt; db.afk.find({ id: &#39;703974042700611634&#39; })
+[
+  {
+    _id: ObjectId(&quot;6550eccc6154a8c9030fe76a&quot;),
+    id: &#39;703974042700611634&#39;,
+    reason: &#39;test&#39;,
+    __v: 0
+  }
+]
+</code></pre>
+<p>Let&#39;s now edit all .envs and change the database url to the new secondary one. For this I checked all dbs that I have and then go from top to bottom editing the secrets.</p>
+<p>After that was done I needed to deploy all changes. I went ahead and created too many tabs on my terminal and ran the all deployment commands on each tab. At the same time.<br>I really hope that doesn&#39;t make my server run out of ram, because I&#39;m really short on that.</p>
+<p>After executing all the commands I <code>rs.stepDown()</code>&#39;ed the primary Raspberry Pi replica and, as expected, the HP Server took over.</p>
+<p>The last command of the day:</p>
+<pre><code class="language-bash">&gt; rs.remove(&quot;ip&quot;)
+</code></pre>
+<p>...SIKE! I needed to check the logs of the containers to see if everything was working fine. The <code>api</code> and <code>vinci</code> to be exact.<br>This is because <code>api</code> runs Prisma and <code>vinci</code> runs the now defunct in my stack, <a href="https://mongoosejs.com/">mongoose</a>.</p>
+<p>Luckily enough, both were fine, so I was free. Yay!</p>
+<h2>Conclusion</h2>
+<p>Welp, that was a lot of work. I&#39;m glad it&#39;s over. I got my HP server on July and it&#39;s now November and I just finished migrating.<br>Could I have done it in less time? Yes.<br>Was I lazy? Also yes.</p>
+<p>So that answers all your questions.</p>
+<p>I hope you enjoyed this my first blog post, and thankfully it was a big one.<br>This took 3 hours in total, but at the end of the day, it was worth it.</p>
+<p>I&#39;ll see you in the next one!</p>
+]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Welcome to my new blog!]]></title>
+            <link>https://srizan.dev/blog/1</link>
+            <guid>https://srizan.dev/blog/1</guid>
+            <pubDate>Sat, 19 Aug 2023 22:00:00 GMT</pubDate>
+            <description><![CDATA[This post welcomes you to my new blog]]></description>
+            <content:encoded><![CDATA[<h1>Hey!</h1>
+<p>This is probably the last time I&#39;m going to make a blog. I&#39;ve made a few in the past, but I&#39;ve never really stuck to them. I&#39;m hoping that this time will be different.<br>This one was made entirely from scratch using React and Markdown, initially trying to use MDX, but it was a pain to set up, and it didn&#39;t end up working in the end.<br>I&#39;m hoping to post about my projects, and maybe some other stuff too. I&#39;m not sure yet, but I&#39;ll figure it out as I go along.<br>Anyways, thank you for reading. I hope you enjoyed my UX/UI for this one!</p>
+<p>PD: I need some help for making the blog text look good and readable, so hit me up on my Discord if you have any ideas.</p>
+]]></content:encoded>
+        </item>
+    </channel>
+</rss>

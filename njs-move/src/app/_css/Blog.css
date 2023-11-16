@@ -1,0 +1,35 @@
+/* All navbar code was refactored to now be in the BlogNavBar.css file alongside with the component. */
+
+/* I adjust the card's width on the BlogPostCard.css file instead of here */
+.blogPosts {
+    margin-top: 80px;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.blogPosts > * {
+    margin-top: 20px;
+}
+
+.bottomRight {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 20px;
+    z-index: 1;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #191919;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}

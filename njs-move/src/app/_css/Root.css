@@ -1,0 +1,33 @@
+.aboutMeBox {
+  width: 480px;
+  height: 360px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  overflow: visible;
+}
+
+.icons {
+  align-self: flex-end;
+}
+
+.icons * {
+  margin-right: 20px;
+}
+.icons svg {
+  /* change from 1em */
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.icons *:last-child {
+  margin-right: 0;
+}
+
+@media (max-width: 480px) {
+  .aboutMeBox {
+    width: 100%;
+  }
+}
