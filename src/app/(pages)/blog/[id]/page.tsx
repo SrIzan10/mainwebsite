@@ -7,10 +7,12 @@ import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import BlogNavBar from "../../../_components/BlogNavBar";
 import '../../../_css/BlogPost.css';
 import React from "react";
-import jsonDataArray from '../../../../../public/blogPosts.json'
+import jsonDataArray from '../../../../../public/blogPosts.json';
+import { redirect } from "next/navigation";
 
 export default async function Page({ params }: { params: { id: string } }) {
     const id = parseInt(params.id);
+    if (Number.isNaN(id)) redirect('/blog')
     let jsonData = {
         id: 0,
         title: '',
@@ -24,7 +26,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     if (filteredPost) {
         jsonData = filteredPost;
     } else {
-        // redirect
+        redirect('/blog')
     }
     return (
         <div>
