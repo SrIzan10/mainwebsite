@@ -10,7 +10,7 @@ import React from "react";
 import Image from "next/image";
 
 export default async function Page({ params }: { params: { id: string } }) {
-    const jsonDataArray: BlogPostJSONResponse[] = JSON.parse(await fs.readFile(process.cwd() + '/public/blogPosts.json', 'utf-8'));
+    const jsonDataArray: BlogPostJSONResponse[] = JSON.parse(await (await fetch('/blogPosts.json')).json())
     const id = parseInt(params.id);
     let jsonData = {
         id: 0,
