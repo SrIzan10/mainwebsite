@@ -7,10 +7,9 @@ import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import BlogNavBar from "../../../_components/BlogNavBar";
 import '../../../_css/BlogPost.css';
 import React from "react";
-import Image from "next/image";
+import jsonDataArray from '../../../../../public/blogPosts.json'
 
 export default async function Page({ params }: { params: { id: string } }) {
-    const jsonDataArray: BlogPostJSONResponse[] = JSON.parse(await (await fetch('blogPosts.json')).json())
     const id = parseInt(params.id);
     let jsonData = {
         id: 0,
