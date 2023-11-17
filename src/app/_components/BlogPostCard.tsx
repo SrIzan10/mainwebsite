@@ -1,12 +1,14 @@
+"use client"
+
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat.js'
-import '../css/BlogPostCard.css'
+import '../_css/BlogPostCard.css'
 import { Button, CardActions } from "@mui/material";
-import {Link} from "react-router-dom";
+import Link from "next/link";
 dayjs.extend(customParseFormat)
 
 export default function BlogPostCard(props: Props) {
@@ -25,7 +27,7 @@ export default function BlogPostCard(props: Props) {
                     </Typography>
                 </CardContent>
                 <CardActions className={'actions'}>
-                    <Link to={`/blog/${props.id}`}><Button size="small">Read</Button></Link>
+                    <Link href={`/blog/${props.id}`}><Button size="small">Read</Button></Link>
                 </CardActions>
             </Box>
         </Card>

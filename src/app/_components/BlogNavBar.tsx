@@ -1,8 +1,13 @@
-import { useEffect, useState } from 'react';
-import '../css/BlogNavBar.css'
-import { Link } from 'react-router-dom';
+// sadge
+'use client';
 
-export function BlogNavBar(props: Props) {
+import { useEffect, useState } from 'react';
+import '../_css/BlogNavBar.css'
+import Link from 'next/link';
+import Pfp from '../../../public/pfp.webp';
+import Image from 'next/image';
+
+export default function BlogNavBar(props: Props) {
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -26,7 +31,7 @@ export function BlogNavBar(props: Props) {
                 <img src="/pfp.webp" alt="main profile picture" height="50vh" />
                 <p>{props.title || 'Sr Izan\'s blog'}</p>
             </div>
-            <Link to={props.title ? '/blog' : '/'} className="backHomeLink">Go back {props.title ? 'to posts' : 'home'}</Link>
+            <Link href={props.title ? '/blog' : '/'} className="backHomeLink">Go back {props.title ? 'to posts' : 'home'}</Link>
         </div>
     )
 }

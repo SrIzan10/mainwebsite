@@ -7,16 +7,18 @@
     line-height: 2;
 }
 
-code {
-    font-family: 'JetBrains Mono', monospace;
-}
-.codeHighlighter {
-    font-family: 'JetBrains Mono', monospace;
-    shadow: 0;
+code .codeHighlighter {
+    font-family: var(--font-mono);
 }
 
 @media (max-width: 900px) {
     .blogPostContent {
         padding: 0;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    .codeHighlighter {
+        background-color: #FFF;
     }
 }

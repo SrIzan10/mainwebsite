@@ -1,7 +1,9 @@
+import Image from "next/image";
+
 export default function Collab() {
     return (
         <div>
-            <img src="/collab.webp" useMap="#image-map" />
+            <Image src="/collab.webp" useMap="#image-map" alt="Collab image" />
 
             <map name="image-map">
                 <area target="_blank" alt="Sr Izan" title="Sr Izan" href="https://srizan.dev" coords="0,0,280,316" shape="rect" />

@@ -1,47 +1,36 @@
-import { useParams } from "react-router-dom";
-import { Helmet } from "react-helmet";
-import { useEffect, useState } from "react";
+import Head from "next/head";
+import * as fs from 'node:fs/promises'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import { BlogNavBar } from "./BlogNavBar.tsx";
-import '../css/BlogPost.css';
+import BlogNavBar from "../../../_components/BlogNavBar";
+import '../../../_css/BlogPost.css';
+import React from "react";
+import jsonDataArray from '../../../../../public/blogPosts.json';
+import { redirect } from "next/navigation";
 
-export function BlogPost() {
-    const id = Number(useParams().id);
-
-    if (isNaN(id)) {
-        // if it's not a number, redirect to the blog page
-        window.location.href = '/blog';
-    }
-
-    const [jsonData, setJsonData] = useState<BlogPostJSONResponse>({
+export default async function Page({ params }: { params: { id: string } }) {
+    const id = parseInt(params.id);
+    if (Number.isNaN(id)) redirect('/blog')
+    let jsonData = {
         id: 0,
         title: '',
         description: '',
         date: '',
         fileName: '',
         fileContent: ''
-    });
+    }
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const jsonFetch = await import('../../blogPosts.json');
-            const jsonDataArray = jsonFetch.default;
-            const filteredPost = jsonDataArray.filter((post) => post.id === id)[0];
-            if (filteredPost) {
-                setJsonData(filteredPost);
-            } else {
-                document.location.href = '/blog';
-            }
-        };
-
-        fetchData();
-    }, [id]);
+    const filteredPost = jsonDataArray.filter((post) => post.id === id)[0];
+    if (filteredPost) {
+        jsonData = filteredPost;
+    } else {
+        redirect('/blog')
+    }
     return (
         <div>
-            <Helmet>
+            <Head>
                 <title>{jsonData.title}</title>
                 <meta name="description" content={jsonData.description} />
                 <meta name="og:title" content={jsonData.title} />
@@ -49,21 +38,19 @@ export function BlogPost() {
                 <meta name="og:type" content="article" />
                 <meta name="og:url" content={`https://srizan.dev/blog/${jsonData.id}`} />
                 <meta name="og:article:author" content="Sr Izan" />
-            </Helmet>
+            </Head>
             <BlogNavBar title={jsonData.title} />
             <div className={'blogPostContent'}>
                 <ReactMarkdown remarkPlugins={[remarkGfm]} components={{
-                    code(props) {
-                        const { children, className, ...rest } = props
+                    code({node, className, children, ...props}) {
                         const match = /language-(\w+)/.exec(className || '')
                         return match ? (
                             <SyntaxHighlighter
-                                {...rest}
                                 style={atomDark}
                                 customStyle={{ backgroundColor: '#171717', outline: 'solid' }}
                                 codeTagProps={{ className: 'codeHighlighter' }}
                                 language={match[1]}
-                                PreTag="div"
+                                // eslint-disable-next-line react/no-children-prop
                                 children={String(children).replace(/\n$/, '')}
                             />
                         ) : (
@@ -77,6 +64,7 @@ export function BlogPost() {
                         )
                     },
                     img(props) {
+                        // eslint-disable-next-line jsx-a11y/alt-text
                         return <img {...props} style={{ maxWidth: '100%' }} />
                     }
                 }}>
