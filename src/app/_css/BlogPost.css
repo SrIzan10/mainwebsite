@@ -18,7 +18,7 @@ code .codeHighlighter {
 }
 
 @media (prefers-color-scheme: light) {
-    .codeHighlighter {
-        background-color: #FFF;
+    code {
+        color: #FFF
     }
 }

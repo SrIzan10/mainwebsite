@@ -3,15 +3,18 @@
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat.js'
 import '../_css/BlogPostCard.css'
-import { Button, CardActions } from "@mui/material";
 import Link from "next/link";
+import React from 'react';
+import { LoadingButton } from '@mui/lab';
 dayjs.extend(customParseFormat)
 
 export default function BlogPostCard(props: Props) {
+    const [loading, setLoading] = React.useState(false);
     return (
         <Card>
             <Box className={'cardBox'}>
@@ -27,7 +30,7 @@ export default function BlogPostCard(props: Props) {
                     </Typography>
                 </CardContent>
                 <CardActions className={'actions'}>
-                    <Link href={`/blog/${props.id}`}><Button size="small">Read</Button></Link>
+                    <Link href={`/blog/${props.id}`}><LoadingButton size="small" loading={loading} onClick={() => setLoading(true)}>Read</LoadingButton></Link>
                 </CardActions>
             </Box>
         </Card>

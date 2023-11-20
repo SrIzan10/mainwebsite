@@ -9,8 +9,7 @@ export default function Page() {
   return (
     <div>
       <div className='aboutMeBox'>
-        {/* style={{ borderRadius: '70px' }} */}
-        <Link href='/collab'><Image src='/pfp.webp' alt='main profile picture' width='200' height='200' /></Link>
+        <Image src='/pfp.webp' alt='main profile picture' width='200' height='200' style={{ borderRadius: '100px' }} />
         <p>A spanish hobbyist developer and osu! player</p>
         <p>Stalk me on social media:</p>
           <div className='icons'>
