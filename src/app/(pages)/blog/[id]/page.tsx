@@ -1,4 +1,3 @@
-import Head from "next/head";
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -8,6 +7,7 @@ import '../../../_css/BlogPost.css';
 import React from "react";
 import jsonDataArray from '../../../../../public/blogPosts.json';
 import { redirect } from "next/navigation";
+import { Metadata } from 'next';
 
 export default async function Page({ params }: { params: { id: string } }) {
     const id = parseInt(params.id);
@@ -29,15 +29,6 @@ export default async function Page({ params }: { params: { id: string } }) {
     }
     return (
         <div>
-            <Head>
-                <title>{jsonData.title}</title>
-                <meta name="description" content={jsonData.description} />
-                <meta name="og:title" content={jsonData.title} />
-                <meta name="og:description" content={jsonData.description} />
-                <meta name="og:type" content="article" />
-                <meta name="og:url" content={`https://srizan.dev/blog/${jsonData.id}`} />
-                <meta name="og:article:author" content="Sr Izan" />
-            </Head>
             <BlogNavBar title={jsonData.title} />
             <div className={'blogPostContent'}>
                 <ReactMarkdown remarkPlugins={[remarkGfm]} components={{
@@ -72,6 +63,36 @@ export default async function Page({ params }: { params: { id: string } }) {
             </div>
         </div>
     );
+}
+
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+    const id = parseInt(params.id);
+    if (Number.isNaN(id)) redirect('/blog')
+    let jsonData = {
+        id: 0,
+        title: '',
+        description: '',
+        date: '',
+        fileName: '',
+        fileContent: ''
+    }
+
+    const filteredPost = jsonDataArray.filter((post) => post.id === id)[0];
+    jsonData = filteredPost;
+
+    return {
+        title: jsonData.title,
+        description: jsonData.description,
+        openGraph: {
+            title: jsonData.title,
+            description: jsonData.description,
+            authors: ['Sr Izan'],
+            type: 'article',
+            url: `https://srizan.dev/blog/${id}`,
+            publishedTime: new Date(jsonData.date).toISOString(),
+            siteName: 'Sr Izan\'s blog',
+        }
+    }
 }
 
 type BlogPostJSONResponse = {
