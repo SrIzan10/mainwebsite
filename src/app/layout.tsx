@@ -2,12 +2,13 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { RootStyleRegistry } from './_components/ThemeRegistry/EmotionRootStyleRegistry';
+import Script from 'next/script.js';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Sr Izan\'s corner for the net',
-  icons: { icon: '/pfp.webp' }
+  icons: { icon: '/pfp.webp' },
 }
 
 export default function RootLayout({
@@ -17,6 +18,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+      <script async src="https://analytics.srizan.dev/ua.js" data-website-id="54ccb44c-b03c-4790-8262-3e1a82241a24" />
+      </head>
       <body className={inter.className}>
         <RootStyleRegistry>
           {children}
