@@ -8,6 +8,9 @@ import React from "react";
 import jsonDataArray from '../../../../../public/blogPosts.json';
 import { redirect } from "next/navigation";
 import { Metadata } from 'next';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat)
 
 export default async function Page({ params }: { params: { id: string } }) {
     const id = parseInt(params.id);
@@ -90,7 +93,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
             authors: ['Sr Izan'],
             type: 'article',
             url: `https://srizan.dev/blog/${id}`,
-            publishedTime: new Date(jsonData.date).toISOString(),
+            publishedTime: dayjs(jsonData.date, 'DD/MM/YYYY').toISOString(),
             siteName: 'Sr Izan\'s blog',
         }
     }
