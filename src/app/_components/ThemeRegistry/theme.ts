@@ -6,23 +6,12 @@ const roboto = Roboto({
   subsets: ['latin'],
   display: 'swap',
 });
-
-// Check if window is defined before accessing its properties
-const prefersDarkMode = typeof window !== 'undefined' ? window.matchMedia('(prefers-color-scheme: dark)') : null;
-
-// Add event listener only if prefersDarkMode is defined
-if (prefersDarkMode) {
-  prefersDarkMode.addEventListener('change', () => {
-    location.reload();
-  });
-}
-
 const theme = createTheme({
   palette: {
-    mode: prefersDarkMode && prefersDarkMode.matches ? 'dark' : 'light',
+    mode: 'dark',
     background: {
-      default: prefersDarkMode && prefersDarkMode.matches ? '#0d0d0d' : '#fafafa',
-      paper: prefersDarkMode && prefersDarkMode.matches ? '#0d0d0d' : '#fafafa',
+      default: '#0d0d0d',
+      paper: '#0d0d0d',
     },
     primary: {
       main: '#646cff',

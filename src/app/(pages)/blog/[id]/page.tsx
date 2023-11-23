@@ -78,6 +78,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     }
 
     const filteredPost = jsonDataArray.filter((post) => post.id === id)[0];
+    if (!filteredPost) redirect('/blog')
     jsonData = filteredPost;
 
     return {
