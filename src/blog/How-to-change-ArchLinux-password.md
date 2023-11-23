@@ -5,19 +5,19 @@ description: This post was made for a certain person who loves to lose passwords
 date: 23/11/2023
 ---
 
-Alright, let's do this. Fast.
+Alright, let's do this. Fast.  
 Disclaimer: this only works when the /home directory is on the same partition, which is the default option if you don't specify.
 
 # Step 1: Boot up a live environment.
 
 For the sake of simplicity, I'll be using the Endeavour OS Galileo installation media, but [any linux distro should work](https://command-not-found.com/arch-chroot)
 
-When you're in, open the terminal:
+When you're in, open the terminal:  
 ![](https://img.srizan.dev/vmware_zCwt9ac9KE.png)
 
 # Step 2: Mounting the linux distro
 
-Type in `lsblk`. This will show all mounted drives.
+Type in `lsblk`. This will show all mounted drives.  
 ![](https://img.srizan.dev/vmware_LPBNlTo9BI.png)
 
 Locate the drive and partition where your installation is.  
