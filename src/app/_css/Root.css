@@ -9,6 +9,21 @@
   overflow: visible;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.bgImage {
+  width: 100vw;
+  height: 100vh;
+  filter: blur(5px);
+  filter: brightness(30%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .icons {
   align-self: flex-end;
 }

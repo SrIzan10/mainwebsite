@@ -1,0 +1,32 @@
+[
+    {
+        "url": "https://img.srizan.dev/Dom%20Luis%20I%20Bridge%20Porto.jpg",
+        "author": "me",
+        "description": "Dom Luis I Bridge (Porto)",
+        "location": "https://www.openstreetmap.org/way/98835981"
+    },
+    {
+        "url": "https://img.srizan.dev/Oviedo%20Landscape.jpg",
+        "author": "me",
+        "description": "Oviedo Landscape",
+        "location": "https://www.openstreetmap.org/way/605000131#map=17/43.37598/-5.86843"
+    },
+    {
+        "url": "https://img.srizan.dev/Playa%20de%20Santa%20Marina.jpeg",
+        "author": "me",
+        "description": "Playa de Santa Marina (Ribadesella)",
+        "location": "https://www.openstreetmap.org/way/822201400#map=19/43.46545/-5.06683"
+    },
+    {
+        "url": "https://img.srizan.dev/Hotel%20Best%20Benalmadena.JPG",
+        "author": "me",
+        "description": "Hotel Best (Benalmádena)",
+        "location": "https://www.openstreetmap.org/node/1253883928"
+    },
+    {
+        "url": "https://img.srizan.dev/Douro%20River%20Porto.jpg",
+        "author": "me",
+        "description": "Douro River (Porto)",
+        "location": "https://www.openstreetmap.org/#map=18/41.14065/-8.60647"
+    }
+]

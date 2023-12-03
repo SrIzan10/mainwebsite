@@ -4,7 +4,7 @@
         <title>Sr Izan's Blog</title>
         <link>https://srizan.dev/blog</link>
         <description>My little donowall place on the net</description>
-        <lastBuildDate>Thu, 23 Nov 2023 19:24:31 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 03 Dec 2023 11:54:57 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -182,15 +182,12 @@ rs0 [direct: secondary] vinci&gt;
             <guid>https://srizan.dev/blog/3</guid>
             <pubDate>Wed, 22 Nov 2023 23:00:00 GMT</pubDate>
             <description><![CDATA[This post was made for a certain person who loves to lose passwords]]></description>
-            <content:encoded><![CDATA[<p>Alright, let&#39;s do this. Fast.
-Disclaimer: this only works when the /home directory is on the same partition, which is the default option if you don&#39;t specify.</p>
+            <content:encoded><![CDATA[<p>Alright, let&#39;s do this. Fast.<br>Disclaimer: this only works when the /home directory is on the same partition, which is the default option if you don&#39;t specify.</p>
 <h1>Step 1: Boot up a live environment.</h1>
 <p>For the sake of simplicity, I&#39;ll be using the Endeavour OS Galileo installation media, but <a href="https://command-not-found.com/arch-chroot">any linux distro should work</a></p>
-<p>When you&#39;re in, open the terminal:
-<img src="https://img.srizan.dev/vmware_zCwt9ac9KE.png" alt=""></p>
+<p>When you&#39;re in, open the terminal:<br><img src="https://img.srizan.dev/vmware_zCwt9ac9KE.png" alt=""></p>
 <h1>Step 2: Mounting the linux distro</h1>
-<p>Type in <code>lsblk</code>. This will show all mounted drives.
-<img src="https://img.srizan.dev/vmware_LPBNlTo9BI.png" alt=""></p>
+<p>Type in <code>lsblk</code>. This will show all mounted drives.<br><img src="https://img.srizan.dev/vmware_LPBNlTo9BI.png" alt=""></p>
 <p>Locate the drive and partition where your installation is.<br>It&#39;s usually the partition with the most space. The space is on the size row (duh)<br>If you have multiple drives with the same size and want more info about the volumes, type in <code>fdisk -l</code>.</p>
 <p>In my case it&#39;s <code>/dev/sda1</code>.</p>
 <p>So let&#39;s mount the partition to the <code>/mnt</code> directory with <code>sudo mount /dev/sda1 /mnt</code>.  </p>
