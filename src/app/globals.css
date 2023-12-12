@@ -21,6 +21,10 @@
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 }
 
+.navbarMargin {
+  margin-top: 90px;
+}
+
 a {
   font-weight: 500;
   color: var(--link-color);

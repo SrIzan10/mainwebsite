@@ -2,7 +2,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import BlogNavBar from "../../../_components/BlogNavBar";
+import BlogNavBar from "../../../_components/NavBar";
 import '../../../_css/BlogPost.css';
 import React from "react";
 import jsonDataArray from '../../../../../public/blogPosts.json';
@@ -32,7 +32,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     }
     return (
         <div>
-            <BlogNavBar title={jsonData.title} />
+            <BlogNavBar title={jsonData.title} isBlog />
             <div className={'blogPostContent'}>
                 <ReactMarkdown remarkPlugins={[remarkGfm]} components={{
                     code({node, className, children, ...props}) {
