@@ -5,7 +5,7 @@ description: A guide on how to install osu! on Endeavour OS
 date: 17/12/2023
 ---
 
-Alright, so you want to install osu! on Endeavour OS. I just reinstalled my system. Two birds with one stone!
+Alright, so you want to install osu! on Endeavour OS. I just reinstalled my system. Two birds with one stone!  
 Based on https://wiki.archlinux.org/title/User:Katoumegumi
 
 # Backstory
@@ -49,8 +49,9 @@ sudo mv ./winetricks /usr/local/bin/winetricks
 
 We now need to install dependencies like fonts or dotnet to make osu! run correctly
 ```sh
-WINEARCH=win32 WINEPREFIX=~/.wineosu winetricks dotnet40 cjkfonts gdiplus
+WINEARCH=win32 WINEPREFIX=~/.wineosu winetricks dotnet40 dotnet45 cjkfonts gdiplus
 ```
+**(update 12/19/2023)**: added `dotnet45` to make it work with [gosumemory](https://github.com/l3lackShark/gosumemory/issues/140#issuecomment-1179663744)
 
 ## Installing osu!
 
