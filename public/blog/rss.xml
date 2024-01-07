@@ -4,7 +4,7 @@
         <title>Sr Izan's Blog</title>
         <link>https://srizan.dev/blog</link>
         <description>My little donowall place on the net</description>
-        <lastBuildDate>Tue, 12 Dec 2023 18:15:17 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 07 Jan 2024 00:01:37 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -174,6 +174,100 @@ rs0 [direct: secondary] vinci&gt;
 <p>So that answers all your questions.</p>
 <p>I hope you enjoyed this my first blog post, and thankfully it was a big one.<br>This took 3 hours in total, but at the end of the day, it was worth it.</p>
 <p>I&#39;ll see you in the next one!</p>
+]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Install osu! on Endeavour OS]]></title>
+            <link>https://srizan.dev/blog/4</link>
+            <guid>https://srizan.dev/blog/4</guid>
+            <pubDate>Sat, 16 Dec 2023 23:00:00 GMT</pubDate>
+            <description><![CDATA[A guide on how to install osu! on Endeavour OS]]></description>
+            <content:encoded><![CDATA[<p>Alright, so you want to install osu! on Endeavour OS. I just reinstalled my system. Two birds with one stone!<br>Based on <a href="https://wiki.archlinux.org/title/User:Katoumegumi">https://wiki.archlinux.org/title/User:Katoumegumi</a></p>
+<h1>Backstory</h1>
+<p>My Windows installation has been unstable since year 1 of my computer, and it even went to the point that when I open osu! sometimes it would just not work, black out my screen and play the last sound it was playing (see audio when a BSOD happens)<br>Yesterday I went to install <a href="https://osu.ppy.sh/home/changelog/stable40/20231217.1">the latest update</a>, click on restart, yadiyadiyada and unfortunately my computer CRASHED. I didn&#39;t feel nervous until I opened up the game to play a bit and find out that my skin was the default one.</p>
+<p>Okay, strange, lemme open up the game...</p>
+<p>It starts importing all beatmaps.</p>
+<p>Okay then, a bit understandable because the update is all about difficulty calculator.</p>
+<p>When it finishes, I go to my most recent plays.<br>Nothing.<br>Never played.<br>What?</p>
+<p>I go into my collections.<br>They&#39;re still there.<br>Okay, but are the scores there?<br>NO!</p>
+<p>Thus, after recovering my replays using a batch scripts that opens all <code>.osr</code> files in my <code>Data\r</code> folder, I just moved to linux, and this is a writeup on how I&#39;ve been installing the game since my first time in April.</p>
+<p>Enjoy!</p>
+<h1>Installation</h1>
+<h2>Installing Wine</h2>
+<p>We first need to install wine and winetricks, to do so run:</p>
+<pre><code class="language-sh">sudo pacman -S wine
+wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+chmod +x winetricks
+sudo mv ./winetricks /usr/local/bin/winetricks
+</code></pre>
+<h2>Preparing wineprefix</h2>
+<p>We now need to install dependencies like fonts or dotnet to make osu! run correctly</p>
+<pre><code class="language-sh">WINEARCH=win32 WINEPREFIX=~/.wineosu winetricks dotnet40 dotnet45 cjkfonts gdiplus
+</code></pre>
+<p><strong>(update 12/19/2023)</strong>: added <code>dotnet45</code> to make it work with <a href="https://github.com/l3lackShark/gosumemory/issues/140#issuecomment-1179663744">gosumemory</a></p>
+<h2>Installing osu!</h2>
+<p>Skipping this part, but basically download the installer and run it.<br>I already have my own 3-year-old installation with all my everything on it, so I&#39;m bind-mounting it.</p>
+<p>Create a directory:</p>
+<pre><code class="language-sh">mkdir ~/.wineosu/osu
+</code></pre>
+<p>And then I added the following fstab line:</p>
+<pre><code class="language-sh">/mnt/HDD/osu! /home/srizan/.wineosu/osu none defaults,bind 0 0
+</code></pre>
+<h2>Trying to open it up</h2>
+<p>Running <code>WINEARCH=win32 WINEPREFIX=~/.wineosu wine ~/.wineosu/osu/osu\!.exe</code> twice leads us in the osu! installer with no network connection found.</p>
+<p>This is a bit easy to fix, as Wine itself yields this error if you scroll up a bit:</p>
+<pre><code class="language-sh">01b0:err:winediag:process_attach Failed to load libgnutls, secure connections will not be available.
+</code></pre>
+<p>Looking the package up in the <a href="https://archlinux.org/packages/?q=libgnutls">Arch Linux repos</a>, a package called <code>lib32-gnutls</code> shows up which looks to be exactly what we want.</p>
+<p>After installing it, the SSL connection worked and the game is going to sta- too bad!
+<img src="/blog/img/osu-eOS/graphicsContext.png" alt=""><br>You thought that was gonna be IT!</p>
+<p>It wants a GL context, which we don&#39;t have, so installing <a href="https://archlinux.org/packages/multilib-testing/x86_64/lib32-mesa/"><code>lib32-mesa</code></a> fixes it. Easy!</p>
+<p>Now, the window is... dark? WHEN ARE WE DONE MAN?<br>Welp, when going to almost the top of the file, we can see this:</p>
+<pre><code class="language-sh">0024:err:winediag:create_gl_drawable XComposite is not available, using GLXPixmap hack.
+</code></pre>
+<p>&quot;GLXPixmap hack&quot;?<br>The game is, according to peppy, held with duct tape, so no hacks are really going to work.</p>
+<p>Here we go, <a href="https://archlinux.org/packages/multilib/x86_64/lib32-libxcomposite/">yet ANOTHER lib32 package</a> should fix it.</p>
+<p>It opens up!<br><img src="/blog/img/osu-eOS/noaudio.mp4" alt=""></p>
+<p>Yeah. Nice. No audio.<br>Browsing through the Arch forums I found <img src="https://bbs.archlinux.org/viewtopic.php?id=135032" alt="this post">, and I installed the three <code>lib32-alsa-plugins lib32-libpulse lib32-openal</code> packages.</p>
+<p>And it started up! (too lazy to screenshot)</p>
+<h2>Setting up the start script</h2>
+<p>edit a file in <code>~/.wineosu/osu/start.sh</code> with the following contents:</p>
+<pre><code class="language-sh">#!/usr/bin/env bash
+
+# props to Katoumegumi for the original script, this is exactly the same one and it works wonders.
+#export PATH=&quot;$HOME/.wineosu/osuwine/bin:$PATH&quot; #Use custom WINE version to run osu!
+export WINEARCH=win32
+export WINEPREFIX=&quot;$HOME/.wineosu&quot;
+#export WINEFSYNC=1
+
+#VSync. For some reason, some people had been getting input latency issues and for some reason, the fix is to set VSync to off.
+export vblank_mode=0 #For AMD, Intel and others
+export __GL_SYNC_TO_VBLANK=0 #For NVIDIA proprietary and open source &gt;=500
+
+#export STAGING_AUDIO_PERIOD=10000
+
+#start osu!
+wine osu\!.exe
+</code></pre>
+<h2>Setting up the freedesktop entry</h2>
+<p>Download the osu! logo:</p>
+<pre><code class="language-sh">wget --output-document ~/.wineosu/osu/icon.png https://github.com/ppy/osu-wiki/raw/master/wiki/Brand_identity_guidelines/img/usage-full-colour.png
+</code></pre>
+<p>and finally edit a new file in the path <code>~/.local/share/applications/osu.desktop</code></p>
+<pre><code>[Desktop Entry]
+Type=Application
+Comment=A free-to-play rhythm game inspired in Osu! Tataekae! Ouendan!
+Icon=/home/&lt;username&gt;/.wineosu/osu/icon.png
+Exec=/home/&lt;username&gt;/.wineosu/osu/start.sh
+Path=/home/&lt;username&gt;/.wineosu/osu
+GenericName=osu!
+Name=osu!
+StartupNotify=true
+</code></pre>
+<h1>that&#39;s it</h1>
+<p>Way harder than I thought. If you want the command with all dependencies, type in:</p>
+<pre><code class="language-sh">sudo pacman -S lib32-gnutls lib32-mesa lib32-alsa-plugins lib32-libpulse lib32-openal
+</code></pre>
 ]]></content:encoded>
         </item>
         <item>
