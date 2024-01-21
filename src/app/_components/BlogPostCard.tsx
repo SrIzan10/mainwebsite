@@ -23,7 +23,7 @@ export default function BlogPostCard(props: Props) {
                         {props.title}
                     </Typography>
                     <Typography variant="subtitle1" color="text.secondary" component="div" suppressHydrationWarning>
-                        {dayjs(props.date, 'DD/MM/YYYY').toDate().toLocaleDateString()}
+                        {dayjs(props.date).toDate().toLocaleDateString()}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" component="div">
                         {props.description}

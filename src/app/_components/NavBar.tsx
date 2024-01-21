@@ -4,10 +4,12 @@
 import { useEffect, useState } from 'react';
 import '../_css/BlogNavBar.css'
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function NavBar(props: Props) {
     const [isScrolled, setIsScrolled] = useState(false);
     const [title, setTitle] = useState(props.title || 'Unnamed page');
+    const router = useRouter()
 
     useEffect(() => {
         if (props.isBlog) {
@@ -34,7 +36,7 @@ export default function NavBar(props: Props) {
                 <img src="/pfp.webp" alt="main profile picture" height="50vh" />
                 <p>{title}</p>
             </div>
-            <Link href={props.isBlog ? '/blog' : '/'} className="backHomeLink">Go back</Link>
+            <Link href='#' onClick={() => router.back()} className="backHomeLink">Go back</Link>
         </div>
     )
 }

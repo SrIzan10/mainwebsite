@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://srizan.dev/blog</id>
     <title>Sr Izan's Blog</title>
-    <updated>2024-01-07T00:01:37.121Z</updated>
+    <updated>2024-01-21T10:28:35.216Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <author>
         <name>Sr Izan</name>
@@ -19,7 +19,7 @@
         <title type="html"><![CDATA[My tales of MongoDB migration]]></title>
         <id>https://srizan.dev/blog/2</id>
         <link href="https://srizan.dev/blog/2"/>
-        <updated>2023-11-11T23:00:00.000Z</updated>
+        <updated>2023-11-12T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Here I ramble about the last service migration I did, MongoDB, and all the difficulties that came with it.]]></summary>
         <content type="html"><![CDATA[<h2>Introduction</h2>
 <p>So, the last few months I&#39;ve been migrating services from my good old Raspberry Pi into my new HP server and the last service I migrated was MongoDB.</p>
@@ -184,7 +184,7 @@ rs0 [direct: secondary] vinci&gt;
         <title type="html"><![CDATA[Install osu! on Endeavour OS]]></title>
         <id>https://srizan.dev/blog/4</id>
         <link href="https://srizan.dev/blog/4"/>
-        <updated>2023-12-16T23:00:00.000Z</updated>
+        <updated>2023-12-17T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[A guide on how to install osu! on Endeavour OS]]></summary>
         <content type="html"><![CDATA[<p>Alright, so you want to install osu! on Endeavour OS. I just reinstalled my system. Two birds with one stone!<br>Based on <a href="https://wiki.archlinux.org/title/User:Katoumegumi">https://wiki.archlinux.org/title/User:Katoumegumi</a></p>
 <h1>Backstory</h1>
@@ -279,10 +279,10 @@ StartupNotify=true
         </author>
     </entry>
     <entry>
-        <title type="html"><![CDATA[How to change the user password in Arch Linux if you forgot it]]></title>
+        <title type="html"><![CDATA[How to change the user password in Arch if you forgot it]]></title>
         <id>https://srizan.dev/blog/3</id>
         <link href="https://srizan.dev/blog/3"/>
-        <updated>2023-11-22T23:00:00.000Z</updated>
+        <updated>2023-11-23T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[This post was made for a certain person who loves to lose passwords]]></summary>
         <content type="html"><![CDATA[<p>Alright, let&#39;s do this. Fast.<br>Disclaimer: this only works when the /home directory is on the same partition, which is the default option if you don&#39;t specify.</p>
 <h1>Step 1: Boot up a live environment.</h1>
@@ -315,11 +315,24 @@ StartupNotify=true
         <title type="html"><![CDATA[Welcome to my new blog!]]></title>
         <id>https://srizan.dev/blog/1</id>
         <link href="https://srizan.dev/blog/1"/>
-        <updated>2023-08-19T22:00:00.000Z</updated>
+        <updated>2024-08-08T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[This post welcomes you to my new blog]]></summary>
         <content type="html"><![CDATA[<h1>Hey!</h1>
 <p>This is probably the last time I&#39;m going to make a blog. I&#39;ve made a few in the past, but I&#39;ve never really stuck to them. I&#39;m hoping that this time will be different.<br>This one was made entirely from scratch using React and Markdown, initially trying to use MDX, but it was a pain to set up, and it didn&#39;t end up working in the end.<br>I&#39;m hoping to post about my projects, and maybe some other stuff too. I&#39;m not sure yet, but I&#39;ll figure it out as I go along.<br>Anyways, thank you for reading. I hope you enjoyed my UX/UI for this one!</p>
 <p>PD: I need some help for making the blog text look good and readable, so hit me up on my Discord if you have any ideas.</p>
+]]></content>
+        <author>
+            <name>Sr Izan</name>
+            <uri>https://srizan.dev</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[My bonsai tree journey]]></title>
+        <id>https://srizan.dev/blog/5</id>
+        <link href="https://srizan.dev/blog/5"/>
+        <updated>2024-01-07T00:19:25.345Z</updated>
+        <content type="html"><![CDATA[<p>Hey! I&#39;ve been &quot;busy&quot; lately with an interesting gift: A bonsai.</p>
+<p>In the beginning I was a bit </p>
 ]]></content>
         <author>
             <name>Sr Izan</name>

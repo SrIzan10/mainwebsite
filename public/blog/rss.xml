@@ -4,7 +4,7 @@
         <title>Sr Izan's Blog</title>
         <link>https://srizan.dev/blog</link>
         <description>My little donowall place on the net</description>
-        <lastBuildDate>Sun, 07 Jan 2024 00:01:37 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 21 Jan 2024 10:28:35 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -19,7 +19,7 @@
             <title><![CDATA[My tales of MongoDB migration]]></title>
             <link>https://srizan.dev/blog/2</link>
             <guid>https://srizan.dev/blog/2</guid>
-            <pubDate>Sat, 11 Nov 2023 23:00:00 GMT</pubDate>
+            <pubDate>Sun, 12 Nov 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[Here I ramble about the last service migration I did, MongoDB, and all the difficulties that came with it.]]></description>
             <content:encoded><![CDATA[<h2>Introduction</h2>
 <p>So, the last few months I&#39;ve been migrating services from my good old Raspberry Pi into my new HP server and the last service I migrated was MongoDB.</p>
@@ -180,7 +180,7 @@ rs0 [direct: secondary] vinci&gt;
             <title><![CDATA[Install osu! on Endeavour OS]]></title>
             <link>https://srizan.dev/blog/4</link>
             <guid>https://srizan.dev/blog/4</guid>
-            <pubDate>Sat, 16 Dec 2023 23:00:00 GMT</pubDate>
+            <pubDate>Sun, 17 Dec 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[A guide on how to install osu! on Endeavour OS]]></description>
             <content:encoded><![CDATA[<p>Alright, so you want to install osu! on Endeavour OS. I just reinstalled my system. Two birds with one stone!<br>Based on <a href="https://wiki.archlinux.org/title/User:Katoumegumi">https://wiki.archlinux.org/title/User:Katoumegumi</a></p>
 <h1>Backstory</h1>
@@ -271,10 +271,10 @@ StartupNotify=true
 ]]></content:encoded>
         </item>
         <item>
-            <title><![CDATA[How to change the user password in Arch Linux if you forgot it]]></title>
+            <title><![CDATA[How to change the user password in Arch if you forgot it]]></title>
             <link>https://srizan.dev/blog/3</link>
             <guid>https://srizan.dev/blog/3</guid>
-            <pubDate>Wed, 22 Nov 2023 23:00:00 GMT</pubDate>
+            <pubDate>Thu, 23 Nov 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[This post was made for a certain person who loves to lose passwords]]></description>
             <content:encoded><![CDATA[<p>Alright, let&#39;s do this. Fast.<br>Disclaimer: this only works when the /home directory is on the same partition, which is the default option if you don&#39;t specify.</p>
 <h1>Step 1: Boot up a live environment.</h1>
@@ -303,11 +303,20 @@ StartupNotify=true
             <title><![CDATA[Welcome to my new blog!]]></title>
             <link>https://srizan.dev/blog/1</link>
             <guid>https://srizan.dev/blog/1</guid>
-            <pubDate>Sat, 19 Aug 2023 22:00:00 GMT</pubDate>
+            <pubDate>Thu, 08 Aug 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[This post welcomes you to my new blog]]></description>
             <content:encoded><![CDATA[<h1>Hey!</h1>
 <p>This is probably the last time I&#39;m going to make a blog. I&#39;ve made a few in the past, but I&#39;ve never really stuck to them. I&#39;m hoping that this time will be different.<br>This one was made entirely from scratch using React and Markdown, initially trying to use MDX, but it was a pain to set up, and it didn&#39;t end up working in the end.<br>I&#39;m hoping to post about my projects, and maybe some other stuff too. I&#39;m not sure yet, but I&#39;ll figure it out as I go along.<br>Anyways, thank you for reading. I hope you enjoyed my UX/UI for this one!</p>
 <p>PD: I need some help for making the blog text look good and readable, so hit me up on my Discord if you have any ideas.</p>
+]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[My bonsai tree journey]]></title>
+            <link>https://srizan.dev/blog/5</link>
+            <guid>https://srizan.dev/blog/5</guid>
+            <pubDate>Sun, 07 Jan 2024 00:19:25 GMT</pubDate>
+            <content:encoded><![CDATA[<p>Hey! I&#39;ve been &quot;busy&quot; lately with an interesting gift: A bonsai.</p>
+<p>In the beginning I was a bit </p>
 ]]></content:encoded>
         </item>
     </channel>

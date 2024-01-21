@@ -2,7 +2,7 @@
 id: 4
 title: Install osu! on Endeavour OS
 description: A guide on how to install osu! on Endeavour OS
-date: 17/12/2023
+date: 2023-12-17T00:00:00Z
 ---
 
 Alright, so you want to install osu! on Endeavour OS. I just reinstalled my system. Two birds with one stone!  

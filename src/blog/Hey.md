@@ -2,7 +2,7 @@
 id: 1
 title: Welcome to my new blog!
 description: This post welcomes you to my new blog
-date: 20/08/2023
+date: 2023-20-08T00:00:00Z
 ---
 
 # Hey!

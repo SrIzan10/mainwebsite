@@ -1,8 +1,8 @@
 ---
 id: 3
-title: How to change the user password in Arch Linux if you forgot it
+title: How to change the user password in Arch if you forgot it
 description: This post was made for a certain person who loves to lose passwords
-date: 23/11/2023
+date: 2023-11-23T00:00:00Z
 ---
 
 Alright, let's do this. Fast.  

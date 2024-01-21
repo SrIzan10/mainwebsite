@@ -1,5 +1,4 @@
 import '../../../app/_css/Blog.css';
-import Head from 'next/head';
 import blogPosts from '../../../../public/blogPosts.json'
 import BlogPostCard from '../../../app/_components/BlogPostCard';
 import BlogNavBar from '../../_components/NavBar';
@@ -8,10 +7,6 @@ import BlogRssDial from '@/app/_components/BlogRssDial';
 function Blog() {
     return (
         <div>
-            <Head>
-                <title>Blog</title>
-                <meta name="theme-color" content="#0d0d0d" />
-            </Head>
             <BlogNavBar isBlog />
             <div className="blogPosts">
                 {blogPosts.map((post) => {

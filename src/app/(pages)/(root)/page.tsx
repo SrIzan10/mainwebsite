@@ -14,7 +14,7 @@ export default function Page() {
         <Image src='/pfp.webp' alt='main profile picture' width='200' height='200' style={{ borderRadius: '100px' }} />
         <p>A spanish hobbyist developer and osu! player</p>
         <p>Stalk me on social media:</p>
-          <div className='icons'>
+        <div className='icons'>
             <Link href='https://github.com/SrIzan10'><FaGithub /></Link>
             <Link href='/blog'><FaBlog /></Link>
             <Link href='https://discord.com/users/703974042700611634'><FaDiscord /></Link>

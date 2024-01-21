@@ -2,7 +2,7 @@
 id: 2
 title: My tales of MongoDB migration
 description: Here I ramble about the last service migration I did, MongoDB, and all the difficulties that came with it.
-date: 12/11/2023
+date: 2023-11-12T00:00:00Z
 ---
 
 ## Introduction

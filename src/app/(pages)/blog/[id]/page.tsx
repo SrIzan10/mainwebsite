@@ -93,7 +93,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
             authors: ['Sr Izan'],
             type: 'article',
             url: `https://srizan.dev/blog/${id}`,
-            publishedTime: dayjs(jsonData.date, 'DD/MM/YYYY').toISOString(),
+            publishedTime: dayjs(jsonData.date).toISOString(),
             siteName: 'Sr Izan\'s blog',
         }
     }
