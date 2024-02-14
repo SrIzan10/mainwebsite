@@ -7,7 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Sr Izan\'s corner for the net',
+  title: 'Sr Izan\'s corner of the net',
   icons: { icon: '/pfp.webp' },
 }
 

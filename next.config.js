@@ -5,6 +5,9 @@ export const nextConfig = {
         remotePatterns: [
             {
                 hostname: 'img.srizan.dev'
+            },
+            {
+                hostname: 'res.cloudinary.com'
             }
         ]
     }

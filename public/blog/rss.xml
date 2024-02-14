@@ -4,7 +4,7 @@
         <title>Sr Izan's Blog</title>
         <link>https://srizan.dev/blog</link>
         <description>My little donowall place on the net</description>
-        <lastBuildDate>Sun, 21 Jan 2024 10:28:35 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 14 Feb 2024 16:06:48 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -308,15 +308,6 @@ StartupNotify=true
             <content:encoded><![CDATA[<h1>Hey!</h1>
 <p>This is probably the last time I&#39;m going to make a blog. I&#39;ve made a few in the past, but I&#39;ve never really stuck to them. I&#39;m hoping that this time will be different.<br>This one was made entirely from scratch using React and Markdown, initially trying to use MDX, but it was a pain to set up, and it didn&#39;t end up working in the end.<br>I&#39;m hoping to post about my projects, and maybe some other stuff too. I&#39;m not sure yet, but I&#39;ll figure it out as I go along.<br>Anyways, thank you for reading. I hope you enjoyed my UX/UI for this one!</p>
 <p>PD: I need some help for making the blog text look good and readable, so hit me up on my Discord if you have any ideas.</p>
-]]></content:encoded>
-        </item>
-        <item>
-            <title><![CDATA[My bonsai tree journey]]></title>
-            <link>https://srizan.dev/blog/5</link>
-            <guid>https://srizan.dev/blog/5</guid>
-            <pubDate>Sun, 07 Jan 2024 00:19:25 GMT</pubDate>
-            <content:encoded><![CDATA[<p>Hey! I&#39;ve been &quot;busy&quot; lately with an interesting gift: A bonsai.</p>
-<p>In the beginning I was a bit </p>
 ]]></content:encoded>
         </item>
     </channel>

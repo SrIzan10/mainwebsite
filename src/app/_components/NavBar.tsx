@@ -33,7 +33,7 @@ export default function NavBar(props: Props) {
     return (
         <div className={`navBar ${isScrolled ? 'hide' : ''}`}>
             <div className="iconContainer">
-                <img src="/pfp.webp" alt="main profile picture" height="50vh" />
+                <img src="https://res.cloudinary.com/mainwebsite/image/upload/v1707926066/assets/emmhztassq5zyol9gubk.webp" alt="main profile picture" height="50vh" />
                 <p>{title}</p>
             </div>
             <Link href='#' onClick={() => router.back()} className="backHomeLink">Go back</Link>

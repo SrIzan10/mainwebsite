@@ -12,8 +12,7 @@ export default function Page() {
       <RandomBackground />
       <div className='aboutMeBox'>
         <Image src='/pfp.webp' alt='main profile picture' width='200' height='200' style={{ borderRadius: '100px' }} />
-        <p>A spanish hobbyist developer and osu! player</p>
-        <p>Stalk me on social media:</p>
+        <p>Hobbyist developer & <Link href={'https://sern.dev'}>sern</Link> lead developer team member</p>
         <div className='icons'>
             <Link href='https://github.com/SrIzan10'><FaGithub /></Link>
             <Link href='/blog'><FaBlog /></Link>

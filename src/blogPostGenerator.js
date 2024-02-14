@@ -35,6 +35,8 @@ await glob('./src/blog/**/*.md').then(async (files) => {
         const readFile = fs.readFileSync(file)
         const dt = gm(readFile).data
         const fileContent = gm(readFile).content
+        if (dt.draft) return
+
         dt.fileContent = fileContent
         dt.fileName = file.replace('src/blog/', '')
         console.log(`File ${dt.fileName} read successfully`)
