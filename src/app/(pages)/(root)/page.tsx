@@ -17,7 +17,7 @@ export default function Page() {
             <Link href='https://github.com/SrIzan10'><FaGithub /></Link>
             <Link href='/blog'><FaBlog /></Link>
             <Link href='https://discord.com/users/703974042700611634'><FaDiscord /></Link>
-            <Link href='https://social.srizan.dev'><FaMastodon /></Link>
+            <Link href='https://social.kalico.moe/@srizan'><FaMastodon /></Link>
             <Link href='https://twitter.com/itssrizan'><FaTwitter /></Link>
             <Link href='https://osu.ppy.sh/users/25350735'><SiOsu /></Link>
         </div>
