@@ -10,6 +10,5 @@ export const nextConfig = {
                 hostname: 'res.cloudinary.com'
             }
         ]
-    },
-    output: 'export'
+    }
 }
