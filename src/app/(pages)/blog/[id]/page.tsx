@@ -5,7 +5,7 @@ import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import BlogNavBar from "../../../_components/NavBar";
 import '../../../_css/BlogPost.css';
 import React from "react";
-import jsonDataArray from '../../../../../public/blogPosts.json';
+import jsonDataArray from '@/blogPosts.json';
 import { redirect } from "next/navigation";
 import { Metadata } from 'next';
 import dayjs from 'dayjs';
