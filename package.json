@@ -5,9 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "node src/blogPostGenerator.js && next dev",
-    "build": "next build",
+    "build": "node src/blogPostGenerator.js && next build",
     "start": "node src/blogPostGenerator.js;next start",
-    "blogposts": "node src/blogPostGenerator.js",
     "lint": "next lint"
   },
   "dependencies": {
