@@ -12,6 +12,8 @@ import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat)
 
+export const runtime = 'edge';
+
 export default async function Page({ params }: { params: { id: string } }) {
     const id = parseInt(params.id);
     if (Number.isNaN(id)) redirect('/blog')
