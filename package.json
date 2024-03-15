@@ -14,8 +14,6 @@
     "@emotion/styled": "^11.11.0",
     "@mui/lab": "^5.0.0-alpha.153",
     "@mui/material": "^5.14.18",
-    "@vercel/edge-config": "^0.4.1",
-    "@vercel/speed-insights": "^1.0.2",
     "dayjs": "^1.11.10",
     "feed": "^4.2.2",
     "glob": "^10.3.10",
@@ -37,5 +35,6 @@
     "eslint": "^8",
     "eslint-config-next": "14.0.2",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "yarn@4.1.1"
 }
