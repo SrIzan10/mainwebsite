@@ -61,7 +61,7 @@ await glob('./src/blog/**/*.md').then(async (files) => {
 
 data.sort((a, b) => b.id - a.id);
 
-fs.writeFileSync('./public/blogPosts.json', JSON.stringify(data))
+fs.writeFileSync('./src/blogPosts.json', JSON.stringify(data))
 fs.writeFileSync('./public/blog/feed.json', feed.json1())
 fs.writeFileSync('./public/blog/rss.xml', feed.rss2())
 fs.writeFileSync('./public/blog/atom.xml', feed.atom1())
