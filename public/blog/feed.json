@@ -57,6 +57,17 @@
                 "name": "Sr Izan",
                 "url": "https://srizan.dev"
             }
+        },
+        {
+            "id": "https://srizan.dev/blog/5",
+            "content_html": "<p>As once our lord and savior Terry A. Davis said, <a href=\"https://www.goodreads.com/quotes/10480697-an-idiot-admires-complexity-a-genius-admires-simplicity-a-physicist\">&quot;An idiot admires complexity, a genius admires simplicity.&quot;</a><br>And, welp, that&#39;s what I just did with my github bot Automata.</p>\n<h1>v1</h1>\n<p>Automata v1 was a real mess. We were supposed to publish a next.js website, a jobs system to make our lives easier, and a large etc.</p>\n<p>Now, I&#39;ve been working on this for quite a while (about a year) and I felt like I wasn&#39;t going anywhere. So I just thought about it we could run the automation scripts on Github Actions, right?</p>\n<h1>So I got to work</h1>\n<p>And in 4 days I got the whole thing working. I&#39;m really proud of it.</p>\n<p>We send API requests to Github whenever we want to trigger a workflow, on demand, by using the webhook system and handling everything from there.<br>As a bonus I also added a command, so we could merge on a more controlled way, specially on larger PRs.</p>\n<h2>Unexpected bugs on prod just after the PR merge</h2>\n<p>There were some bugs on launch.</p>\n<ul>\n<li>I didn&#39;t have a start script nor a license <a href=\"https://github.com/sern-handler/automata/commit/05c6ac3b81740ab9dcf86155b16afc84e7c850c8\">(commit)</a></li>\n<li>I forgot to change some environment variable names on index.ts <a href=\"https://github.com/sern-handler/automata/commit/6e5d21ce548db04e9926ef7dfc3c1a5945d61aed\">(commit)</a></li>\n<li>A day later, forgot to listen on the <code>PORT</code> environment variable <a href=\"https://github.com/sern-handler/automata/commit/622d6e72ded4330e06e802432677855a5397cedc\">(commit)</a></li>\n<li>Squash and merge by default (ended up regretting it, see below) <a href=\"https://github.com/sern-handler/automata/commit/65ccede477f509c2e2de27be40a78281b79cda18\">(commit)</a></li>\n<li>I FORGOT TO CHECK IF THE COMMAND MENTIONED @SERNBOT <a href=\"https://github.com/sern-handler/automata/commit/a5e58a415423eace3a8b0d6fbc4fe43e050c0624\">(commit)</a></li>\n</ul>\n<p>That last one was a real pain, as I detected the bug in production, on the most important PR of the week, if not the month: the website&#39;s move to starlight docs.\n<img src=\"/blog/img/sernAutomataV2/prMerge1.png\" alt=\"\"><br><img src=\"/blog/img/sernAutomataV2/prMerge2.png\" alt=\"\"></p>\n<h1>Conclusion</h1>\n<p>Wow, a project with good DevEx? SIGN ME UP!</p>\n<p>PD: I created a next.js template with my preferred tech stack, make sure to check it out! <a href=\"https://stack.srizan.dev\">link</a></p>\n",
+            "url": "https://srizan.dev/blog/5",
+            "title": "Releasing sern Automata v2",
+            "date_modified": "2024-05-08T18:46:01.405Z",
+            "author": {
+                "name": "Sr Izan",
+                "url": "https://srizan.dev"
+            }
         }
     ]
 }

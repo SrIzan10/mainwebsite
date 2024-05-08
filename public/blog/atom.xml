@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://srizan.dev/blog</id>
     <title>Sr Izan's Blog</title>
-    <updated>2024-02-14T16:06:48.920Z</updated>
+    <updated>2024-05-08T19:45:59.407Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <author>
         <name>Sr Izan</name>
@@ -320,6 +320,38 @@ StartupNotify=true
         <content type="html"><![CDATA[<h1>Hey!</h1>
 <p>This is probably the last time I&#39;m going to make a blog. I&#39;ve made a few in the past, but I&#39;ve never really stuck to them. I&#39;m hoping that this time will be different.<br>This one was made entirely from scratch using React and Markdown, initially trying to use MDX, but it was a pain to set up, and it didn&#39;t end up working in the end.<br>I&#39;m hoping to post about my projects, and maybe some other stuff too. I&#39;m not sure yet, but I&#39;ll figure it out as I go along.<br>Anyways, thank you for reading. I hope you enjoyed my UX/UI for this one!</p>
 <p>PD: I need some help for making the blog text look good and readable, so hit me up on my Discord if you have any ideas.</p>
+]]></content>
+        <author>
+            <name>Sr Izan</name>
+            <uri>https://srizan.dev</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Releasing sern Automata v2]]></title>
+        <id>https://srizan.dev/blog/5</id>
+        <link href="https://srizan.dev/blog/5"/>
+        <updated>2024-05-08T18:46:01.405Z</updated>
+        <content type="html"><![CDATA[<p>As once our lord and savior Terry A. Davis said, <a href="https://www.goodreads.com/quotes/10480697-an-idiot-admires-complexity-a-genius-admires-simplicity-a-physicist">&quot;An idiot admires complexity, a genius admires simplicity.&quot;</a><br>And, welp, that&#39;s what I just did with my github bot Automata.</p>
+<h1>v1</h1>
+<p>Automata v1 was a real mess. We were supposed to publish a next.js website, a jobs system to make our lives easier, and a large etc.</p>
+<p>Now, I&#39;ve been working on this for quite a while (about a year) and I felt like I wasn&#39;t going anywhere. So I just thought about it we could run the automation scripts on Github Actions, right?</p>
+<h1>So I got to work</h1>
+<p>And in 4 days I got the whole thing working. I&#39;m really proud of it.</p>
+<p>We send API requests to Github whenever we want to trigger a workflow, on demand, by using the webhook system and handling everything from there.<br>As a bonus I also added a command, so we could merge on a more controlled way, specially on larger PRs.</p>
+<h2>Unexpected bugs on prod just after the PR merge</h2>
+<p>There were some bugs on launch.</p>
+<ul>
+<li>I didn&#39;t have a start script nor a license <a href="https://github.com/sern-handler/automata/commit/05c6ac3b81740ab9dcf86155b16afc84e7c850c8">(commit)</a></li>
+<li>I forgot to change some environment variable names on index.ts <a href="https://github.com/sern-handler/automata/commit/6e5d21ce548db04e9926ef7dfc3c1a5945d61aed">(commit)</a></li>
+<li>A day later, forgot to listen on the <code>PORT</code> environment variable <a href="https://github.com/sern-handler/automata/commit/622d6e72ded4330e06e802432677855a5397cedc">(commit)</a></li>
+<li>Squash and merge by default (ended up regretting it, see below) <a href="https://github.com/sern-handler/automata/commit/65ccede477f509c2e2de27be40a78281b79cda18">(commit)</a></li>
+<li>I FORGOT TO CHECK IF THE COMMAND MENTIONED @SERNBOT <a href="https://github.com/sern-handler/automata/commit/a5e58a415423eace3a8b0d6fbc4fe43e050c0624">(commit)</a></li>
+</ul>
+<p>That last one was a real pain, as I detected the bug in production, on the most important PR of the week, if not the month: the website&#39;s move to starlight docs.
+<img src="/blog/img/sernAutomataV2/prMerge1.png" alt=""><br><img src="/blog/img/sernAutomataV2/prMerge2.png" alt=""></p>
+<h1>Conclusion</h1>
+<p>Wow, a project with good DevEx? SIGN ME UP!</p>
+<p>PD: I created a next.js template with my preferred tech stack, make sure to check it out! <a href="https://stack.srizan.dev">link</a></p>
 ]]></content>
         <author>
             <name>Sr Izan</name>

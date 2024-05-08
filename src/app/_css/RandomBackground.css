@@ -3,6 +3,9 @@
     height: 100vh;
     filter: blur(5px);
     filter: brightness(30%);
+    object-fit: cover;
+    z-index: -1;
+    background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
