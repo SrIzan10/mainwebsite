@@ -1,85 +1,46 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
+import BaseHead from '../components/BaseHead.astro'
+import Header from '../components/Header.astro'
+import FormattedDate from '../components/FormattedDate.astro'
+import type { PostOrPage } from '@tryghost/content-api'
+import { Image } from 'astro:assets'
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = PostOrPage
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, excerpt: description, published_at, updated_at, feature_image, feature_image_caption, feature_image_alt } = Astro.props
 ---
 
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
-	</head>
+  <head>
+    <BaseHead title={title!} description={description || '(no description)'} />
+  </head>
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
+  <body>
+    <Header />
+    <main class="w-full max-w-full mx-0">
+      <article>
+        <div class="w-full flex flex-col items-center justify-center">
+          {feature_image && <Image class="shadow" width={720} height={200} src={feature_image} alt={feature_image_alt || ''} />}
+          {feature_image_caption && <span class="text-sm italic text-gray-500" set:html={feature_image_caption} />}
+        </div>
+        <div class="prose dark:prose-invert prose-code:dark:text-black w-prose max-w-[calc(100%-2em)] mx-auto p-2">
+          <div class="mb-4 py-4 text-sm leading-none pt-10">
+            <div class="mb-2">
+              <FormattedDate date={new Date(published_at!)} />
+              {
+                updated_at && (
+                  <div class="italic">
+                    Last updated on <FormattedDate date={new Date(updated_at)} />
+                  </div>
+                )
+              }
+            </div>
+            <h1 class="m-0 mb-2 text-center">{title}</h1>
+            <hr />
+          </div>
+          <slot />
+        </div>
+      </article>
+    </main>
+  </body>
 </html>
