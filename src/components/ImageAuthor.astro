@@ -20,5 +20,5 @@ const { url, author, description, location } = Astro.props;
 <div class='absolute bottom-0 right-0 text-[0.8em] text-white bg-black opacity-40 select-none flex transition-opacity duration-150 ease-in-out hover:opacity-100'>
   <a href={location} target="_blank"><p>{description}</p></a>
   <p>by {author}</p>
-  <a href={url} target="_blank"><FaExternalLinkAlt /></a>
+  <a href={url} target="_blank" aria-label="image url"><FaExternalLinkAlt /></a>
 </div>

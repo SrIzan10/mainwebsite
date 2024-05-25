@@ -24,15 +24,15 @@ const randomBackground = Backgrounds[Math.floor(Math.random() * Backgrounds.leng
       <div class={`w-screen h-screen z-[-1] bg-fixed bg-center bg-no-repeat bg-cover rounded-none object-cover brightness-[30%]`} style={`background-image: url('${randomBackground.url}')`}/>
     <ImageAuthor {...randomBackground} />
         <div class="w-[480px] h-[360px] absolute -translate-x-2/4 -translate-y-2/4 text-center overflow-visible left-2/4 top-2/4 text-white flex justify-center items-center flex-col gap-5">
-          <Image src='/pfp.webp' alt={''} width='200' height='200' class='rounded-full' />
+          <Image src='/pfp.webp' alt={'pfp'} width='200' height='200' class='rounded-full' loading="lazy" />
           <p>Hobbyist developer & <a href={'https://sern.dev'}>sern</a> lead developer team member</p>
           <div class='flex gap-5 justify-center'>
-              <a href='https://github.com/SrIzan10'><FaGithub /></a>
-              <a href='/blog'><FaBlog /></a>
-              <a href='https://discord.com/users/703974042700611634'><FaDiscord /></a>
-              <a href='https://social.kalico.moe/@srizan'><FaMastodon /></a>
-              <a href='https://twitter.com/itssrizan'><FaTwitter /></a>
-              <a href='https://osu.ppy.sh/users/25350735'><SiOsu /></a>
+              <a href='https://github.com/SrIzan10' aria-label="github"><FaGithub /></a>
+              <a href='/blog' aria-label="blog"><FaBlog /></a>
+              <a href='https://discord.com/users/703974042700611634' aria-label="discord"><FaDiscord /></a>
+              <a href='https://social.kalico.moe/@srizan' aria-label="mastodon"><FaMastodon /></a>
+              <a href='https://twitter.com/itssrizan' aria-label="twitter"><FaTwitter /></a>
+              <a href='https://osu.ppy.sh/users/25350735' aria-label="osu!"><SiOsu /></a>
           </div>
         </div>
     </body>
