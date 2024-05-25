@@ -1,0 +1,31 @@
+---
+import { SITE_TITLE } from '../consts';
+import { ModeToggle } from '@/components/ui/modetoggle';
+---
+
+<script is:inline>
+	const getThemePreference = () => {
+		if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+			return localStorage.getItem('theme');
+		}
+		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+	};
+	const isDark = getThemePreference() === 'dark';
+	document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+ 
+	if (typeof localStorage !== 'undefined') {
+		const observer = new MutationObserver(() => {
+			const isDark = document.documentElement.classList.contains('dark');
+			localStorage.setItem('theme', isDark ? 'dark' : 'light');
+		});
+		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+	}
+</script>
+
+<div class="flex items-center fixed gap-4 p-2 bg-slate-300/35 dark:bg-slate-500/20 backdrop-blur-md w-full sm:w-auto">
+	<a href="/" class="font-bold text-lg">{ SITE_TITLE }</a>
+	<a href="/blog">Blog</a>
+	<a href="https://jp.srizan.dev">日本語</a>
+	<div class="flex-1" />
+	<ModeToggle client:load />
+</div>

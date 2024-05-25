@@ -1,0 +1,24 @@
+---
+import { FaExternalLinkAlt } from 'react-icons/fa';
+import '@/styles/global.css'
+type Props = {
+    url: string;
+    author: string;
+    description: string;
+    location: string;
+}
+
+const { url, author, description, location } = Astro.props;
+---
+
+<style>
+  p {
+    @apply mr-[0.2em] my-[0.1em] first:ml-[0.2em];
+  }
+</style>
+
+<div class='absolute bottom-0 right-0 text-[0.8em] text-white bg-black opacity-40 select-none flex transition-opacity duration-150 ease-in-out hover:opacity-100'>
+  <a href={location} target="_blank"><p>{description}</p></a>
+  <p>by {author}</p>
+  <a href={url} target="_blank"><FaExternalLinkAlt /></a>
+</div>

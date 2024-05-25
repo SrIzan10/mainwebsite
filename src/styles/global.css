@@ -1,0 +1,182 @@
+/*
+  The CSS in this style tag is based off of Bear Blog's default CSS.
+  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
+  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
+ */
+@import url('https://fonts.srizan.dev/satoshi.css');
+
+:root {
+  --accent: #2337ff;
+  --accent-dark: #000d8a;
+  --black: 15, 18, 25;
+  --gray: 96, 115, 159;
+  --gray-light: 229, 233, 240;
+  --gray-dark: 34, 41, 57;
+  --gray-gradient: rgba(var(--gray-light), 50%), #fff;
+  --box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%);
+}
+
+
+
+body {
+  font-family: 'Satoshi-Medium', sans-serif !important;
+  @apply text-left overflow-auto text-lg leading-relaxed bg-white dark:bg-gray-900 text-black dark:text-white;
+}
+
+main {
+  @apply mx-auto px-4 py-16 w-full max-w-7xl;
+}
+
+h1 {
+  @apply text-6xl mb-2 leading-tight;
+}
+
+h2 {
+  @apply text-5xl mb-2 leading-snug;
+}
+
+h3 {
+  @apply text-4xl mb-2 leading-normal;
+}
+
+h4 {
+  @apply text-3xl mb-2 leading-normal;
+}
+
+h5 {
+  @apply text-2xl mb-2 leading-normal;
+}
+h6 {
+  @apply text-xl mb-2 leading-normal;
+}
+
+strong,
+b {
+  @apply font-bold;
+}
+
+a {
+  @apply !text-blue-500;
+}
+
+a:hover {
+  @apply !text-blue-700;
+}
+
+textarea {
+  @apply w-full text-base;
+}
+
+input {
+  @apply text-base;
+}
+
+table {
+  @apply w-full;
+}
+
+img {
+  @apply max-w-full h-auto rounded-lg;
+}
+
+code {
+  @apply px-1 py-0.5 bg-gray-200 rounded-sm;
+}
+
+pre {
+  @apply p-6 rounded-lg;
+}
+
+blockquote {
+  @apply border-l-4 border-blue-600 pl-5 text-xl;
+}
+
+hr {
+  @apply border-none border-t border-gray-200;
+}
+
+@media (max-width: 720px) {
+  body {
+    @apply text-base;
+  }
+  main {
+    @apply p-4;
+  }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
