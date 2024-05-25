@@ -1,22 +1,10 @@
 ---
-/* import { type CollectionEntry, getCollection } from 'astro:content
-
-export async function getStaticPaths() {
-  const posts = await getCollection('blog')
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: post,
-  }))
-}
-type Props = CollectionEntry<'blog'>
-
-const rawHTMLString = "Hello <strong>World</strong>"
-
-const post = Astro.props
-const { Content } = await post.render() */
-
 import BlogPost from '../../layouts/BlogPost.astro'
 import { ghostClient } from '../../lib/ghost';
+import type { PostOrPage } from '@tryghost/content-api';
+import * as shiki from 'shiki'
+import { JSDOM } from 'jsdom'
+
 export async function getStaticPaths() {
     const posts = await ghostClient.posts
         .browse({
@@ -33,9 +21,23 @@ export async function getStaticPaths() {
         };
     });
 }
-const { post } = Astro.props;
+const { post } = Astro.props as { post: PostOrPage };
+
+// parse the post.html content, get the code blocks and highlight them
+const doc = new JSDOM(post.html!)
+const codeBlocks = doc.window.document.querySelectorAll('code')
+for (const codeBlock of codeBlocks) {
+  if (!codeBlock.className) continue
+    const language = codeBlock.className.replace('language-', '')
+    const code = codeBlock.textContent
+    const rendered = await shiki.codeToHtml(code!, {
+      lang: language,
+      theme: 'tokyo-night',
+    })
+    codeBlock.innerHTML = rendered
+}
 ---
 
 <BlogPost {...post}>
-  <Fragment set:html={post.html} />
+  <Fragment set:html={doc.serialize()} />
 </BlogPost>
