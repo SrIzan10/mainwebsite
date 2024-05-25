@@ -28,6 +28,9 @@
   font-style: normal;
   font-display: swap;
 }
+
+
+
 body {
   font-family: 'Atkinson', sans-serif;
   @apply text-left overflow-auto text-lg leading-relaxed bg-white dark:bg-gray-900 text-black dark:text-white;
@@ -66,11 +69,11 @@ b {
 }
 
 a {
-  @apply text-blue-600;
+  @apply !text-blue-500;
 }
 
 a:hover {
-  @apply text-blue-600;
+  @apply !text-blue-700;
 }
 
 textarea {

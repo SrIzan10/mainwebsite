@@ -1,14 +1,39 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import Backgrounds from '../backgrounds.json';
+import { Image } from 'astro:assets';
+import ImageAuthor from '@/components/ImageAuthor.astro';
+import { FaGithub, FaBlog, FaDiscord, FaMastodon, FaTwitter } from 'react-icons/fa';
+import { SiOsu } from 'react-icons/si';
+
+const randomBackground = Backgrounds[Math.floor(Math.random() * Backgrounds.length)];
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<p>h</p>
-	</body>
+    <head>
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+        <style>
+          svg {
+            @apply w-6 h-6;
+          }
+        </style>
+    </head>
+    <body class="relative">
+      <div class={`w-screen h-screen z-[-1] bg-fixed bg-center bg-no-repeat bg-cover rounded-none object-cover brightness-[30%]`} style={`background-image: url('${randomBackground.url}')`}/>
+    <ImageAuthor {...randomBackground} />
+        <div class="w-[480px] h-[360px] absolute -translate-x-2/4 -translate-y-2/4 text-center overflow-visible left-2/4 top-2/4 text-white flex justify-center items-center flex-col gap-5">
+          <Image src='/pfp.webp' alt={''} width='200' height='200' class='rounded-full' />
+          <p>Hobbyist developer & <a href={'https://sern.dev'}>sern</a> lead developer team member</p>
+          <div class='flex gap-5 justify-center'>
+              <a href='https://github.com/SrIzan10'><FaGithub /></a>
+              <a href='/blog'><FaBlog /></a>
+              <a href='https://discord.com/users/703974042700611634'><FaDiscord /></a>
+              <a href='https://social.kalico.moe/@srizan'><FaMastodon /></a>
+              <a href='https://twitter.com/itssrizan'><FaTwitter /></a>
+              <a href='https://osu.ppy.sh/users/25350735'><SiOsu /></a>
+          </div>
+        </div>
+    </body>
 </html>

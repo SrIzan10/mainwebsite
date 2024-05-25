@@ -1,19 +1,17 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
-import { getCollection } from 'astro:content';
-import FormattedDate from '../../components/FormattedDate.astro';
-import { Image } from 'astro:assets';
-import { ghostClient } from '@/lib/ghost';
+import BaseHead from '../../components/BaseHead.astro'
+import Header from '../../components/Header.astro'
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts'
+import FormattedDate from '../../components/FormattedDate.astro'
+import { Image } from 'astro:assets'
+import { ghostClient } from '@/lib/ghost'
 
-const posts = await ghostClient.posts
-    .browse({
-        limit: 'all',
-    })
+const posts = await ghostClient.posts.browse({
+  limit: 'all',
+})
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
@@ -32,14 +30,7 @@ const posts = await ghostClient.posts
             posts.map((post) => (
               <li class="flex flex-col items-center sm:items-start">
                 <a href={`/blog/${post.slug}/`} class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">
-                  <Image
-                    class="rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
-                    width={720}
-                    height={360}
-                    src={post.feature_image || 'https://images.unsplash.com/photo-1519681393784-d120267933ba'}
-                    alt=""
-					          loading="lazy"
-                  />
+                  <Image class="rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200" width={720} height={360} src={post.feature_image || 'https://images.unsplash.com/photo-1519681393784-d120267933ba'} alt="" loading="lazy" />
                   <h4 class="text-xl font-bold mt-2">{post.title}</h4>
                   <p class="mt-1">
                     <FormattedDate date={new Date(post.published_at!)} />
