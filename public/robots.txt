@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://srizan.dev/sitemap-index.xml
