@@ -5,10 +5,9 @@ import { Image } from 'astro:assets'
 import ImageAuthor from '@/components/ImageAuthor.astro'
 import { FaGithub, FaBlog, FaDiscord, FaMastodon, FaTwitter } from 'react-icons/fa'
 import { SiOsu } from 'react-icons/si'
+import Background from '../backgrounds.json'
 
-const fetchBackgrond = await fetch(`${Astro.url}/backgrounds.json`).then(async res => await res.json())
-
-const randomBackground = fetchBackgrond[Math.floor(Math.random() * fetchBackgrond.length)]
+const randomBackground = Background[Math.floor(Math.random() * Background.length)]
 ---
 
 <!doctype html>
