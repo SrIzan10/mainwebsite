@@ -3,7 +3,7 @@ import BaseHead from '../components/BaseHead.astro'
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
 import { Image } from 'astro:assets'
 import ImageAuthor from '@/components/ImageAuthor.astro'
-import { FaGithub, FaBlog, FaDiscord, FaMastodon, FaTwitter } from 'react-icons/fa'
+import { FaGithub, FaBlog, FaDiscord, FaMastodon, FaBluesky } from 'react-icons/fa6'
 import { SiOsu } from 'react-icons/si'
 import Background from '../backgrounds.json'
 
@@ -28,10 +28,10 @@ const randomBackground = Background[Math.floor(Math.random() * Background.length
       <p>Hobbyist developer & <a href={'https://sern.dev'}>sern</a> lead developer team member</p>
       <div class="flex gap-5 justify-center">
         <a href="https://github.com/SrIzan10" aria-label="github"><FaGithub /></a>
-        <a href="/blog" aria-label="blog"><FaBlog /></a>
+        <a href="https://blog.srizan.dev" aria-label="blog"><FaBlog /></a>
         <a href="https://discord.com/users/703974042700611634" aria-label="discord"><FaDiscord /></a>
         <a href="https://social.kalico.moe/@srizan" aria-label="mastodon"><FaMastodon /></a>
-        <a href="https://twitter.com/itssrizan" aria-label="twitter"><FaTwitter /></a>
+        <a href="https://bsky.app/profile/srizan.dev" aria-label="twitter"><FaBluesky /></a>
         <a href="https://osu.ppy.sh/users/25350735" aria-label="osu!"><SiOsu /></a>
       </div>
     </div>
