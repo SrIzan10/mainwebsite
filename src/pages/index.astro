@@ -3,7 +3,7 @@ import BaseHead from '../components/BaseHead.astro'
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
 import { Image } from 'astro:assets'
 import ImageAuthor from '@/components/ImageAuthor.astro'
-import { FaGithub, FaBlog, FaDiscord, FaMastodon, FaBluesky } from 'react-icons/fa6'
+import { FaGithub, FaBlog, FaDiscord, FaMastodon, FaBluesky, FaHeart } from 'react-icons/fa6'
 import { SiOsu } from 'react-icons/si'
 import Background from '../backgrounds.json'
 
@@ -33,6 +33,7 @@ const randomBackground = Background[Math.floor(Math.random() * Background.length
         <a href="https://social.kalico.moe/@srizan" aria-label="mastodon"><FaMastodon /></a>
         <a href="https://bsky.app/profile/srizan.dev" aria-label="twitter"><FaBluesky /></a>
         <a href="https://osu.ppy.sh/users/25350735" aria-label="osu!"><SiOsu /></a>
+        <a href="https://github.com/sponsors/SrIzan10" aria-label="sponsor" class="hover:!text-red-600"><FaHeart /></a>
       </div>
     </div>
   </body>
