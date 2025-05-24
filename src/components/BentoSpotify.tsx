@@ -34,7 +34,7 @@ export default function BentoSpotify() {
 
   if (isLoading) {
     return (
-      <div className="relative h-full w-full overflow-hidden rounded-lg bg-gradient-to-br from-green-500/10 to-green-600/5">
+      <div className="relative h-full w-full overflow-hidden rounded-lg bg-gradient-to-br from-primary/10 to-primary/5">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="h-full w-full bg-[radial-gradient(circle_at_20%_80%,_theme(colors.green.500)_0%,_transparent_50%)]"></div>
@@ -42,7 +42,7 @@ export default function BentoSpotify() {
         
         {/* Spotify Logo */}
         <div className="absolute right-3 top-3 z-10">
-          <FaSpotify size={24} className="text-green-500" />
+          <FaSpotify size={24} className="text-primary" />
         </div>
 
         <div className="relative z-10 flex h-full flex-col p-4">
@@ -78,21 +78,21 @@ export default function BentoSpotify() {
   const { name: song, artist, album, image, url } = displayData
 
   return (
-  <div className="relative h-full w-full overflow-hidden rounded-lg bg-gradient-to-br from-green-500/10 to-green-600/5">
+  <div className="relative h-full w-full overflow-hidden rounded-lg bg-gradient-to-br from-primary/10 to-primary/5">
     {/* Background Pattern */}
     <div className="absolute inset-0 opacity-5">
-      <div className="h-full w-full bg-[radial-gradient(circle_at_20%_80%,_theme(colors.green.500)_0%,_transparent_50%)]"></div>
+      <div className="h-full w-full bg-[radial-gradient(circle_at_20%_80%,_theme(colors.primary)_0%,_transparent_50%)]"></div>
     </div>
     
     {/* Spotify Logo */}
     <div className="absolute right-3 top-3 z-10">
-      <FaSpotify size={24} className="text-green-500" />
+      <FaSpotify size={24} className="text-primary" />
     </div>
 
     <div className="relative z-10 flex h-full flex-col p-4">
       {/* Header */}
       <div className="mb-4 flex items-center gap-2">
-        <div className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+        <div className="flex h-2 w-2 rounded-full bg-primary animate-pulse"></div>
         <span className="text-xs font-medium text-muted-foreground">
           {displayData['@attr']?.nowplaying === 'true'
             ? 'NOW PLAYING'
@@ -111,7 +111,7 @@ export default function BentoSpotify() {
             className="h-16 w-16 rounded-lg border shadow-lg"
           />
           {displayData['@attr']?.nowplaying === 'true' && (
-            <div className="absolute -bottom-1 -right-1 h-4 w-4 rounded-full bg-green-500 border-2 border-background"></div>
+            <div className="absolute -bottom-1 -right-1 h-4 w-4 rounded-full bg-primary border-2 border-background"></div>
           )}
         </div>
 
@@ -132,7 +132,7 @@ export default function BentoSpotify() {
       <div className="mt-4 flex items-center justify-between">
         <div className="flex items-center gap-1">
           <div className="h-1 w-8 rounded-full bg-muted">
-            <div className="h-full rounded-full bg-green-500"></div>
+            <div className="h-full rounded-full bg-primary"></div>
           </div>
         </div>
         
