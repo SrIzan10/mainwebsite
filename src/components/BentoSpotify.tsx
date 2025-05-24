@@ -20,7 +20,7 @@ export default function BentoSpotify() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    fetch('https://lastfm-last-played.biancarosa.com.br/enscribe/latest-song')
+    fetch('https://lastfm-last-played.biancarosa.com.br/SrIzan10/latest-song')
       .then((response) => response.json())
       .then((data) => {
         setDisplayData(data.track)
