@@ -1,26 +1,31 @@
 ---
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
+import Link from '@/components/Link.astro'
+import BentoSpotify from '@/components/BentoSpotify'
 ---
 
 <Layout>
   <PageHead slot="head" title="Home" />
   <section class="p-4">
-    <!-- Mobile: Single column stack, Tablet: 2 columns, Desktop: 3 columns -->
     <div
       class="grid w-full grid-cols-1 grid-rows-6 gap-4 md:aspect-[3/2] md:grid-cols-2 md:grid-rows-4 lg:aspect-[4/3] lg:grid-cols-3 lg:grid-rows-3"
     >
-      <!-- Profile Image -->
-      <div class="bento-item rounded-lg border p-2 md:col-span-2 lg:col-span-2">
+      <div class="bento-item rounded-lg border p-2 md:col-span-2 lg:col-span-2 flex flex-col items-center justify-center relative *:text-center">
+        <img src="https://res.cloudinary.com/mainwebsite/image/upload/v1703593035/bg/Playa_de_Santa_Marina_ae389j.jpg" class="absolute inset-0 object-cover w-full h-full rounded-lg opacity-20" />
         <img
           src="https://github.com/SrIzan10.png"
-          class="h-32 w-full rounded object-cover md:h-40"
+          class="rounded-full w-24 h-24 mb-2 relative z-10"
         />
-        <p>hi im ethan</p>
+        <p class="relative z-10">Hi! I'm Izan, a student from Málaga, Spain</p>
+        <p class="relative z-10">I mainly do open source work at <Link href="https://sern.dev" external underline>sern</Link> and <Link href="https://hackclub.com" external underline>Hack Club</Link>.</p>
+        <p class="relative z-10">In my free time, I enjoy coding, reading and learning languages.</p>
       </div>
 
       <!-- Spotify -->
-      <div class="bento-item rounded-lg border p-2">spotify</div>
+      <div class="bento-item rounded-lg border">
+        <BentoSpotify client:load />
+      </div>
 
       <!-- Filler -->
       <div class="bento-item rounded-lg border p-2 md:row-span-2 lg:row-span-2">
