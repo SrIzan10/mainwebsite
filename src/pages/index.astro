@@ -1,8 +1,12 @@
 ---
-import PageHead from '@/components/PageHead.astro'
-import Layout from '@/layouts/Layout.astro'
-import Link from '@/components/Link.astro'
 import BentoSpotify from '@/components/BentoSpotify'
+import Link from '@/components/Link.astro'
+import PageHead from '@/components/PageHead.astro'
+import { Badge } from '@/components/ui/badge'
+import Layout from '@/layouts/Layout.astro'
+import { getRecentPosts } from '@/lib/data-utils'
+import { Icon } from 'astro-icon/components'
+const allPosts = await getRecentPosts(2)
 ---
 
 <Layout>
@@ -11,15 +15,30 @@ import BentoSpotify from '@/components/BentoSpotify'
     <div
       class="grid w-full grid-cols-1 grid-rows-6 gap-4 md:aspect-[3/2] md:grid-cols-2 md:grid-rows-4 lg:aspect-[4/3] lg:grid-cols-3 lg:grid-rows-3"
     >
-      <div class="bento-item rounded-lg border p-2 md:col-span-2 lg:col-span-2 flex flex-col items-center justify-center relative *:text-center">
-        <img src="https://res.cloudinary.com/mainwebsite/image/upload/v1703593035/bg/Playa_de_Santa_Marina_ae389j.jpg" class="absolute inset-0 object-cover w-full h-full rounded-lg opacity-20" />
+      <div
+        class="bento-item relative flex flex-col items-center justify-center rounded-lg border p-2 *:text-center md:col-span-2 lg:col-span-2"
+      >
+        <img
+          src="https://res.cloudinary.com/mainwebsite/image/upload/v1703593035/bg/Playa_de_Santa_Marina_ae389j.jpg"
+          class="absolute inset-0 h-full w-full rounded-lg object-cover opacity-20"
+        />
         <img
           src="https://github.com/SrIzan10.png"
-          class="rounded-full w-24 h-24 mb-2 relative z-10"
+          class="relative z-10 mb-2 h-24 w-24 rounded-full"
         />
         <p class="relative z-10">Hi! I'm Izan, a student from Málaga, Spain</p>
-        <p class="relative z-10">I mainly do open source work at <Link href="https://sern.dev" external underline>sern</Link> and <Link href="https://hackclub.com" external underline>Hack Club</Link>.</p>
-        <p class="relative z-10">In my free time, I enjoy coding, reading and learning languages.</p>
+        <p class="relative z-10">
+          I mainly do open source work at <Link
+            href="https://sern.dev"
+            external
+            underline>sern</Link
+          > and <Link href="https://hackclub.com" external underline
+            >Hack Club</Link
+          >.
+        </p>
+        <p class="relative z-10">
+          In my free time, I enjoy coding, reading and learning languages.
+        </p>
       </div>
 
       <!-- Spotify -->
@@ -28,8 +47,59 @@ import BentoSpotify from '@/components/BentoSpotify'
       </div>
 
       <!-- Filler -->
-      <div class="bento-item rounded-lg border p-2 md:row-span-2 lg:row-span-2">
+      <div class="bento-item rounded-lg border p-2 md:row-span-2 lg:row-span-2 hidden sm:flex">
         filler
+      </div>
+
+      <!-- Blog -->
+      <div
+        class="bento-item from-primary/5 to-primary/10 rounded-lg border bg-gradient-to-br p-4 md:col-span-2 lg:col-span-2"
+      >
+        <div class="mb-4 flex items-center justify-between">
+          <h2 class="text-foreground text-lg font-semibold">Latest Posts</h2>
+          <Link
+            href="/blog"
+            class="text-muted-foreground hover:text-foreground text-sm transition-colors"
+            >View all →</Link
+          >
+        </div>
+        <div class="space-y-3">
+          {
+            allPosts.map((post) => (
+              <div class="group">
+                <Link
+                  href={`/blog/${post.id}`}
+                  class="bg-background/50 hover:bg-background/80 border-border/50 hover:border-border block rounded-md border p-3 transition-all duration-200 hover:shadow-sm"
+                >
+                  <div class="flex">
+                    <h3 class="text-foreground group-hover:text-primary line-clamp-1 font-medium transition-colors">
+                      {post.data.title}
+                    </h3>
+                    <div class="flex-1" />
+                    {post.data.tags && (
+                      <div class="hidden flex-wrap gap-2 sm:flex">
+                        {post.data.tags.map((tag) => (
+                          <Badge
+                          variant="secondary"
+                          className="flex items-center gap-x-1"
+                          >
+                            <Icon name="lucide:hash" class="size-3" />
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  {post.data.description && (
+                    <p class="text-muted-foreground mt-1 line-clamp-2 text-sm">
+                      {post.data.description}
+                    </p>
+                  )}
+                </Link>
+              </div>
+            ))
+          }
+        </div>
       </div>
 
       <!-- Discord -->
@@ -37,11 +107,6 @@ import BentoSpotify from '@/components/BentoSpotify'
 
       <!-- Wakatime -->
       <div class="bento-item rounded-lg border p-2">wakatime</div>
-
-      <!-- GitHub Graph -->
-      <div class="bento-item rounded-lg border p-2 md:col-span-2 lg:col-span-2">
-        github graph
-      </div>
     </div>
   </section>
 </Layout>
