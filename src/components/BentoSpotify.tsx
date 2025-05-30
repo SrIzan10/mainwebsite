@@ -101,7 +101,7 @@ export default function BentoSpotify() {
       </div>
 
       {/* Album Art & Info */}
-      <div className="flex flex-1 gap-3">
+      <div className="flex flex-1 gap-3 items-center">
         <div className="relative flex-shrink-0">
           <img
             src={image[3]['#text']}
