@@ -53,7 +53,7 @@ export default function BentoSpotify() {
           </div>
 
           {/* Album Art & Info Skeleton */}
-          <div className="flex flex-1 gap-3">
+          <div className="flex flex-1 gap-3 items-center">
             <Skeleton className="h-16 w-16 rounded-lg flex-shrink-0" />
             
             <div className="flex min-w-0 flex-1 flex-col justify-center gap-2">
