@@ -1,6 +1,7 @@
 ---
 import BentoSpotify from '@/components/BentoSpotify'
 import BentoWeather from '@/components/BentoWeather'
+import BentoDiscord from '@/components/BentoDiscord'
 import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
 import { Badge } from '@/components/ui/badge'
@@ -109,7 +110,9 @@ const allPosts = await getRecentPosts(2)
       </div>
 
       <!-- Discord -->
-      <div class="bento-item rounded-lg border p-2">Discord</div>
+      <div class="bento-item rounded-lg border">
+        <BentoDiscord client:load />
+      </div>
     </div>
   </section>
 </Layout>
