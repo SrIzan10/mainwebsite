@@ -82,10 +82,10 @@ export default function BentoDiscord() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "online": return "bg-green-500";
-      case "idle": return "bg-yellow-500";
-      case "dnd": return "bg-red-500";
-      default: return "bg-gray-500";
+      case "online": return "bg-green-400";
+      case "idle": return "bg-yellow-400";
+      case "dnd": return "bg-red-400";
+      default: return "bg-gray-400";
     }
   };
 
