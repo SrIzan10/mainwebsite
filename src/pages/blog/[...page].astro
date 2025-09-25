@@ -17,6 +17,8 @@ export async function getStaticPaths({
   return paginate(allPosts, { pageSize: SITE.postsPerPage })
 }
 
+export const prerender = true
+
 const { page } = Astro.props
 
 const postsByYear = groupPostsByYear(page.data)

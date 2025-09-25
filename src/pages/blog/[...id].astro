@@ -27,6 +27,8 @@ import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets'
 import { render } from 'astro:content'
 
+export const prerender = true
+
 export async function getStaticPaths() {
   const posts = await getAllPostsAndSubposts()
   return posts.map((post) => ({
