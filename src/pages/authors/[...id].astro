@@ -14,6 +14,8 @@ export async function getStaticPaths() {
   }))
 }
 
+export const prerender = true
+
 const { author } = Astro.props
 const authorPosts = await getPostsByAuthor(author.id)
 ---
