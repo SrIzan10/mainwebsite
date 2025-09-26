@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react"
 import { Skeleton } from "./ui/skeleton"
 import { FaSpotify } from 'react-icons/fa'
-import { MoveUpRight } from "lucide-react"
+import { MoveUpRight, User } from "lucide-react"
 
 interface Track {
   name: string
@@ -129,13 +129,25 @@ export default function BentoSpotify() {
       </div>
 
       {/* Footer */}
-      <div className="mt-4 flex items-center justify-between">
+      <div className="mt-4 flex items-center justify-between gap-2">
         <div className="flex items-center gap-1">
           <div className="h-1 w-8 rounded-full bg-muted">
             <div className="h-full rounded-full bg-primary"></div>
           </div>
         </div>
+
+        <div className="flex-1" />
         
+        <a
+          href={'https://www.last.fm/user/SrIzan10'}
+          aria-label="View last.fm profile"
+          title="View last.fm profile"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary/80 text-muted-foreground transition-all duration-200 hover:bg-secondary hover:text-foreground hover:scale-110"
+        >
+          <User size={14} />
+        </a>
         <a
           href={url}
           aria-label="View on last.fm"
