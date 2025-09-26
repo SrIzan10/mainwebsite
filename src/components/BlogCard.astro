@@ -13,6 +13,7 @@ import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 import Link from './Link.astro'
+import { Ratings } from './ui/rating'
 
 interface Props {
   entry: CollectionEntry<'blog'>
@@ -23,6 +24,8 @@ const formattedDate = formatDate(entry.data.date)
 const readTime = await getCombinedReadingTime(entry.id)
 const authors = await parseAuthors(entry.data.authors ?? [])
 const subpostCount = !isSubpost(entry.id) ? await getSubpostCount(entry.id) : 0
+
+const rating = entry.data.tags?.find((tag) => tag.startsWith('rating-'))
 ---
 
 <div
@@ -90,13 +93,18 @@ const subpostCount = !isSubpost(entry.id) ? await getSubpostCount(entry.id) : 0
 
       {
         entry.data.tags && (
-          <div class="flex flex-wrap gap-2">
-            {entry.data.tags.map((tag) => (
+          <div class="flex flex-wrap gap-2 items-center">
+            {rating && <div>
+              <Ratings rating={parseFloat(rating.replace('rating-', ''))} size={15} />
+            </div>}
+            {entry.data.tags.map((tag) => {
+              if (tag.startsWith('rating-')) return null;
+              return (
               <Badge variant="secondary" className="flex items-center gap-x-1">
                 <Icon name="lucide:hash" class="size-3" />
                 {tag}
               </Badge>
-            ))}
+            )})}
           </div>
         )
       }

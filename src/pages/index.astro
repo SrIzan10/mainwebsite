@@ -1,10 +1,11 @@
 ---
+import BentoDiscord from '@/components/BentoDiscord'
 import BentoSpotify from '@/components/BentoSpotify'
 import BentoWeather from '@/components/BentoWeather'
-import BentoDiscord from '@/components/BentoDiscord'
 import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
 import { Badge } from '@/components/ui/badge'
+import { Ratings } from '@/components/ui/rating'
 import Layout from '@/layouts/Layout.astro'
 import { getRecentPosts } from '@/lib/data-utils'
 import { Icon } from 'astro-icon/components'
@@ -49,8 +50,14 @@ const allPosts = await getRecentPosts(2)
       </div>
 
       <!-- Filler -->
-      <div class="bento-item rounded-lg border md:row-span-2 lg:row-span-2 hidden sm:flex">
-        <img src="https://pplx-res.cloudinary.com/image/upload/v1748887970/gpt4o_images/o90mzm7zkejhphtmzh1m.png" class="rounded-lg object-cover" style="object-position: -255px center;" />
+      <div
+        class="bento-item hidden rounded-lg border sm:flex md:row-span-2 lg:row-span-2"
+      >
+        <img
+          src="https://pplx-res.cloudinary.com/image/upload/v1748887970/gpt4o_images/o90mzm7zkejhphtmzh1m.png"
+          class="rounded-lg object-cover"
+          style="object-position: -255px center;"
+        />
       </div>
 
       <!-- Blog -->
@@ -67,39 +74,54 @@ const allPosts = await getRecentPosts(2)
         </div>
         <div class="space-y-3">
           {
-            allPosts.map((post) => (
-              <div class="group">
-                <Link
-                  href={`/blog/${post.id}`}
-                  class="bg-background/50 hover:bg-background/80 border-border/50 hover:border-border block rounded-md border p-3 transition-all duration-200 hover:shadow-sm"
-                >
-                  <div class="flex">
-                    <h3 class="text-foreground group-hover:text-primary line-clamp-1 font-medium transition-colors">
-                      {post.data.title}
-                    </h3>
-                    <div class="flex-1" />
-                    {post.data.tags && (
-                      <div class="hidden flex-wrap gap-2 sm:flex">
-                        {post.data.tags.map((tag) => (
-                          <Badge
-                          variant="secondary"
-                          className="flex items-center gap-x-1"
-                          >
-                            <Icon name="lucide:hash" class="size-3" />
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
+            allPosts.map((post) => {
+              const rating = post.data.tags?.find((tag) =>
+                tag.startsWith('rating-')
+              )
+              return (
+                <div class="group">
+                  <Link
+                    href={`/blog/${post.id}`}
+                    class="bg-background/50 hover:bg-background/80 border-border/50 hover:border-border block rounded-md border p-3 transition-all duration-200 hover:shadow-sm"
+                  >
+                    <div class="flex">
+                      <h3 class="text-foreground group-hover:text-primary line-clamp-1 font-medium transition-colors">
+                        {post.data.title}
+                      </h3>
+                      <div class="flex-1" />
+                      {post.data.tags && (
+                        <div class="hidden flex-wrap gap-2 sm:flex">
+                          {rating && (
+                            <Ratings
+                              rating={parseFloat(rating.replace('rating-', ''))}
+                              size={15}
+                            />
+                          )}
+
+                          {post.data.tags.map((tag) => {
+                            if (tag.startsWith('rating-')) return null
+                            return (
+                              <Badge
+                                variant="secondary"
+                                className="flex items-center gap-x-1"
+                              >
+                                <Icon name="lucide:hash" class="size-3" />
+                                {tag}
+                              </Badge>
+                            )
+                          })}
+                        </div>
+                      )}
+                    </div>
+                    {post.data.description && (
+                      <p class="text-muted-foreground mt-1 line-clamp-2 text-sm">
+                        {post.data.description}
+                      </p>
                     )}
-                  </div>
-                  {post.data.description && (
-                    <p class="text-muted-foreground mt-1 line-clamp-2 text-sm">
-                      {post.data.description}
-                    </p>
-                  )}
-                </Link>
-              </div>
-            ))
+                  </Link>
+                </div>
+              )
+            })
           }
         </div>
       </div>
