@@ -9,6 +9,7 @@ import TOCHeader from '@/components/TOCHeader.astro'
 import TOCSidebar from '@/components/TOCSidebar.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { Ratings } from '@/components/ui/rating'
 import { Separator } from '@/components/ui/separator'
 import Layout from '@/layouts/Layout.astro'
 import {
@@ -22,6 +23,7 @@ import {
   isSubpost,
   parseAuthors,
 } from '@/lib/data-utils'
+import { getReleaseData } from '@/lib/discogs'
 import { formatDate } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets'
@@ -51,6 +53,10 @@ const subpostCount = !isCurrentSubpost
   ? await getSubpostCount(currentPostId)
   : 0
 const postReadingTime = await getPostReadingTime(currentPostId)
+const rating = post.data.tags?.find((tag) => tag.startsWith('rating-'))
+const discogs = post.data.discogs
+  ? await getReleaseData(post.data.discogs)
+  : null
 ---
 
 <Layout>
@@ -101,15 +107,16 @@ const postReadingTime = await getPostReadingTime(currentPostId)
     </div>
 
     {
-      post.data.image && (
-        <Image
-          src={post.data.image}
-          alt={post.data.title}
-          width={1200}
-          height={630}
-          class="col-span-full mx-auto w-full max-w-5xl object-cover"
-        />
-      )
+      post.data.image ||
+        (discogs && discogs.images[0]?.resource_url && (
+          <Image
+            src={post.data.image || discogs.images[0].resource_url}
+            alt={post.data.title}
+            width={1200}
+            height={630}
+            class="col-span-full mx-auto max-h-96 w-full max-w-4xl rounded-lg object-contain"
+          />
+        ))
     }
 
     <section class="col-start-2 flex flex-col gap-y-6 text-center">
@@ -176,17 +183,25 @@ const postReadingTime = await getPostReadingTime(currentPostId)
         </div>
 
         <div class="flex flex-wrap justify-center gap-2">
+          {rating && (
+            <Ratings rating={parseFloat(rating.replace('rating-', ''))} size={15} />
+          )}
           {
             post.data.tags && post.data.tags.length > 0 ? (
-              post.data.tags.map((tag) => (
-                <a
-                  href={`/tags/${tag}`}
-                  class={badgeVariants({ variant: 'secondary' })}
-                >
-                  <Icon name="lucide:hash" class="size-3" />
-                  {tag}
-                </a>
-              ))
+              post.data.tags.map((tag) => {
+                if (tag.startsWith('rating-')) return null;
+                return (
+                  <div>
+                    <a
+                      href={`/tags/${tag}`}
+                      class={badgeVariants({ variant: 'secondary' })}
+                    >
+                      <Icon name="lucide:hash" class="size-3" />
+                      {tag}
+                    </a>
+                  </div>
+                )
+              })
             ) : (
               <span class="text-muted-foreground text-sm">
                 No tags available
@@ -257,7 +272,7 @@ const postReadingTime = await getPostReadingTime(currentPostId)
 
           scrollToTopButton.classList.toggle(
             'hidden',
-            window.scrollY <= 300 || isFooterVisible,
+            window.scrollY <= 300 || isFooterVisible
           )
         })
       }

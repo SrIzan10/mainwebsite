@@ -14,6 +14,7 @@ import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 import Link from './Link.astro'
 import { Ratings } from './ui/rating'
+import { getReleaseData } from '@/lib/discogs'
 
 interface Props {
   entry: CollectionEntry<'blog'>
@@ -26,6 +27,7 @@ const authors = await parseAuthors(entry.data.authors ?? [])
 const subpostCount = !isSubpost(entry.id) ? await getSubpostCount(entry.id) : 0
 
 const rating = entry.data.tags?.find((tag) => tag.startsWith('rating-'))
+const discogs = entry.data.discogs ? await getReleaseData(entry.data.discogs) : null;
 ---
 
 <div
@@ -36,14 +38,14 @@ const rating = entry.data.tags?.find((tag) => tag.startsWith('rating-'))
     class="flex flex-col gap-4 sm:flex-row"
   >
     {
-      entry.data.image && (
-        <div class="max-w-3xs sm:shrink-0">
+      entry.data.image || (discogs && discogs.images[0]?.resource_url) && (
+        <div class="w-48 max-w-48 sm:shrink-0 h-30">
           <Image
-            src={entry.data.image}
+            src={entry.data.image || discogs.images[0].resource_url}
             alt={entry.data.title}
             width={1200}
-            height={630}
-            class="object-cover"
+            height={400}
+            class="w-full h-full object-cover rounded-lg"
           />
         </div>
       )
