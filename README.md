@@ -1,5 +1,7 @@
 # srizan.dev
 
+[try it out!](https://astro-v2.mainwebsite-243.pages.dev/)
+
 srizan.dev astro rewrite (v2)!
 
 includes blogging and project portfolio. additionally, extra quality of life features for writing, such as:
