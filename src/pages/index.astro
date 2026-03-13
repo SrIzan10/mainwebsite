@@ -1,5 +1,6 @@
 ---
 import BentoDiscord from '@/components/BentoDiscord'
+import BentoGithub from '@/components/BentoGithub'
 import BentoSpotify from '@/components/BentoSpotify'
 import BentoWeather from '@/components/BentoWeather'
 import Link from '@/components/Link.astro'
@@ -16,7 +17,7 @@ const allPosts = await getRecentPosts(2)
   <PageHead slot="head" title="Home" />
   <section class="p-4">
     <div
-      class="grid w-full grid-cols-1 grid-rows-6 gap-4 md:aspect-[3/2] md:grid-cols-2 md:grid-rows-4 lg:aspect-[4/3] lg:grid-cols-3 lg:grid-rows-3"
+      class="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:aspect-[4/3] lg:grid-cols-3 lg:grid-rows-3"
     >
       <div
         class="bento-item relative flex flex-col items-center justify-center rounded-lg border p-2 *:text-center md:col-span-2 lg:col-span-2"
@@ -45,19 +46,8 @@ const allPosts = await getRecentPosts(2)
       </div>
 
       <!-- Spotify -->
-      <div class="bento-item rounded-lg border">
+      <div class="bento-item rounded-lg border h-full">
         <BentoSpotify client:load />
-      </div>
-
-      <!-- Filler -->
-      <div
-        class="bento-item hidden rounded-lg border sm:flex md:row-span-2 lg:row-span-2"
-      >
-        <img
-          src="https://pplx-res.cloudinary.com/image/upload/v1748887970/gpt4o_images/o90mzm7zkejhphtmzh1m.png"
-          class="rounded-lg object-cover"
-          style="object-position: -255px center;"
-        />
       </div>
 
       <!-- Blog -->
@@ -127,13 +117,18 @@ const allPosts = await getRecentPosts(2)
       </div>
 
       <!-- Weather -->
-      <div class="bento-item rounded-lg border">
+      <div class="bento-item rounded-lg border h-full">
         <BentoWeather client:load />
       </div>
 
       <!-- Discord -->
-      <div class="bento-item rounded-lg border">
+      <div class="bento-item rounded-lg border h-full">
         <BentoDiscord client:load />
+      </div>
+
+      <!-- GitHub -->
+      <div class="bento-item rounded-lg border h-full lg:col-span-2">
+        <BentoGithub client:load />
       </div>
     </div>
   </section>

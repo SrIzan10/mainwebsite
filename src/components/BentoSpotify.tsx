@@ -1,10 +1,9 @@
 // code based on https://github.com/jktrn/enscribe.dev/blob/main/src/components/bento/SpotifyPresence.tsx
 // which is under copyright.
 
-import { useEffect, useState } from "react"
-import { Skeleton } from "./ui/skeleton"
-import { FaSpotify } from 'react-icons/fa'
-import { MoveUpRight, User } from "lucide-react"
+import { useEffect, useState } from 'react'
+import { Skeleton } from './ui/skeleton'
+import { FaLastfm } from 'react-icons/fa'
 
 interface Track {
   name: string
@@ -34,132 +33,67 @@ export default function BentoSpotify() {
 
   if (isLoading) {
     return (
-      <div className="relative h-full w-full overflow-hidden rounded-lg bg-gradient-to-br from-primary/10 to-primary/5">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="h-full w-full bg-[radial-gradient(circle_at_20%_80%,_theme(colors.green.500)_0%,_transparent_50%)]"></div>
+      <div className="flex h-full w-full flex-col justify-between rounded-lg p-4">
+        <div className="flex items-center gap-2">
+          <Skeleton className="h-3 w-16" />
         </div>
-        
-        {/* Spotify Logo */}
-        <div className="absolute right-3 top-3 z-10">
-          <FaSpotify size={24} className="text-primary" />
-        </div>
-
-        <div className="relative z-10 flex h-full flex-col p-4">
-          {/* Header Skeleton */}
-          <div className="mb-4 flex items-center gap-2">
-            <Skeleton className="h-2 w-2 rounded-full" />
-            <Skeleton className="h-3 w-20" />
-          </div>
-
-          {/* Album Art & Info Skeleton */}
-          <div className="flex flex-1 gap-3 items-center">
-            <Skeleton className="h-16 w-16 rounded-lg flex-shrink-0" />
-            
-            <div className="flex min-w-0 flex-1 flex-col justify-center gap-2">
-              <Skeleton className="h-4 w-3/4" />
-              <Skeleton className="h-3 w-1/2" />
-              <Skeleton className="h-3 w-2/3" />
-            </div>
-          </div>
-
-          {/* Footer Skeleton */}
-          <div className="mt-4 flex items-center justify-between">
-            <Skeleton className="h-1 w-8 rounded-full" />
-            <Skeleton className="h-8 w-8 rounded-full" />
+        <div className="flex items-center gap-3">
+          <Skeleton className="h-12 w-12 flex-shrink-0 rounded-md" />
+          <div className="flex min-w-0 flex-1 flex-col gap-2">
+            <Skeleton className="h-4 w-3/4" />
+            <Skeleton className="h-3 w-1/2" />
           </div>
         </div>
+        <Skeleton className="h-3 w-20" />
       </div>
     )
   }
 
-  if (!displayData) return <p>Something absolutely horrible has gone wrong</p>
+  if (!displayData)
+    return <p className="text-muted-foreground p-4 text-sm">Unavailable</p>
 
   const { name: song, artist, album, image, url } = displayData
+  const isNowPlaying = displayData['@attr']?.nowplaying === 'true'
 
   return (
-  <div className="relative h-full w-full overflow-hidden rounded-lg bg-gradient-to-br from-primary/10 to-primary/5">
-    {/* Background Pattern */}
-    <div className="absolute inset-0 opacity-5">
-      <div className="h-full w-full bg-[radial-gradient(circle_at_20%_80%,_theme(colors.primary)_0%,_transparent_50%)]"></div>
-    </div>
-    
-    {/* Spotify Logo */}
-    <div className="absolute right-3 top-3 z-10">
-      <FaSpotify size={24} className="text-primary" />
-    </div>
-
-    <div className="relative z-10 flex h-full flex-col p-4">
-      {/* Header */}
-      <div className="mb-4 flex items-center gap-2">
-        <div className="flex h-2 w-2 rounded-full bg-primary animate-pulse"></div>
-        <span className="text-xs font-medium text-muted-foreground">
-          {displayData['@attr']?.nowplaying === 'true'
-            ? 'NOW PLAYING'
-            : 'LAST PLAYED'}
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group hover:bg-accent/40 flex h-full w-full flex-col justify-between rounded-lg p-4 transition-colors duration-200"
+    >
+      {/* Label */}
+      <div className="flex items-center justify-between">
+        <span className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
+          {isNowPlaying ? 'Now Playing' : 'Last Played'}
         </span>
+        <FaLastfm
+          className="text-muted-foreground/50 group-hover:text-muted-foreground transition-colors"
+          size={16}
+        />
       </div>
 
-      {/* Album Art & Info */}
-      <div className="flex flex-1 gap-3 items-center">
-        <div className="relative flex-shrink-0">
-          <img
-            src={image[3]['#text']}
-            alt="Album art"
-            width={64}
-            height={64}
-            className="h-16 w-16 rounded-lg border shadow-lg"
-          />
-          {displayData['@attr']?.nowplaying === 'true' && (
-            <div className="absolute -bottom-1 -right-1 h-4 w-4 rounded-full bg-primary border-2 border-background"></div>
-          )}
-        </div>
-
-        <div className="flex min-w-0 flex-1 flex-col justify-center">
-          <h3 className="mb-1 truncate text-sm font-bold leading-tight">
-            {song}
-          </h3>
-          <p className="truncate text-xs text-muted-foreground">
+      {/* Track info */}
+      <div className="flex items-center gap-3">
+        <img
+          src={image[3]['#text']}
+          alt="Album art"
+          width={48}
+          height={48}
+          className="h-12 w-12 flex-shrink-0 rounded-md object-cover"
+        />
+        <div className="flex min-w-0 flex-col">
+          <p className="truncate text-sm leading-snug font-semibold">{song}</p>
+          <p className="text-muted-foreground truncate text-xs">
             {artist['#text']}
           </p>
-          <p className="truncate text-xs text-muted-foreground/70">
-            {album['#text']}
-          </p>
         </div>
       </div>
 
-      {/* Footer */}
-      <div className="mt-4 flex items-center justify-between gap-2">
-        <div className="flex items-center gap-1">
-          <div className="h-1 w-8 rounded-full bg-muted">
-            <div className="h-full rounded-full bg-primary"></div>
-          </div>
-        </div>
-
-        <div className="flex-1" />
-        
-        <a
-          href={'https://www.last.fm/user/SrIzan10'}
-          aria-label="View last.fm profile"
-          title="View last.fm profile"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary/80 text-muted-foreground transition-all duration-200 hover:bg-secondary hover:text-foreground hover:scale-110"
-        >
-          <User size={14} />
-        </a>
-        <a
-          href={url}
-          aria-label="View on last.fm"
-          title="View on last.fm"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary/80 text-muted-foreground transition-all duration-200 hover:bg-secondary hover:text-foreground hover:scale-110"
-        >
-          <MoveUpRight size={14} />
-        </a>
-      </div>
-    </div>
-  </div>
-)
+      {/* Album */}
+      <p className="text-muted-foreground/60 truncate text-xs">
+        {album['#text']}
+      </p>
+    </a>
+  )
 }

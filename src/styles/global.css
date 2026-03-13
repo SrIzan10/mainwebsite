@@ -51,42 +51,44 @@
   font-display: swap;
 }
 
+/* Flexoki light — https://stephango.com/flexoki */
 :root {
-  --background: #faf4ed;
-  --foreground: #575279;
-  --primary: #286983;
-  --primary-foreground: #faf4ed;
-  --secondary: #f2e9e1;
-  --secondary-foreground: #575279;
-  --muted: #f2e9e1;
-  --muted-foreground: #797593;
-  --accent: #d7827e;
-  --accent-foreground: #575279;
-  --additive: #56949f;
-  --additive-foreground: #faf4ed;
-  --destructive: #b4637a;
-  --destructive-foreground: #faf4ed;
-  --border: #dfdad9;
-  --ring: #907aa9;
+  --background: #fffcf0; /* paper */
+  --foreground: #100f0f; /* black */
+  --primary: #205ea6; /* blue-600 */
+  --primary-foreground: #fffcf0;
+  --secondary: #f2f0e5; /* base-50 */
+  --secondary-foreground: #100f0f;
+  --muted: #f2f0e5; /* base-50 */
+  --muted-foreground: #6f6e69; /* base-600 */
+  --accent: #e6e4d9; /* base-100 */
+  --accent-foreground: #100f0f;
+  --additive: #66800b; /* green-600 */
+  --additive-foreground: #fffcf0;
+  --destructive: #af3029; /* red-600 */
+  --destructive-foreground: #fffcf0;
+  --border: #dad8ce; /* base-150 */
+  --ring: #205ea6; /* blue-600 */
 }
 
-[data-theme="dark"] {
-  --background: #191724;
-  --foreground: #e0def4;
-  --primary: #c4a7e7;
-  --primary-foreground: #191724;
-  --secondary: #26233a;
-  --secondary-foreground: #e0def4;
-  --muted: #26233a;
-  --muted-foreground: #908caa;
-  --accent: #eb6f92;
-  --accent-foreground: #e0def4;
-  --additive: #9ccfd8;
-  --additive-foreground: #191724;
-  --destructive: #eb6f92;
-  --destructive-foreground: #e0def4;
-  --border: #403d52;
-  --ring: #6e6a86;
+/* Flexoki dark */
+[data-theme='dark'] {
+  --background: #1c1b1a; /* base-950 */
+  --foreground: #cecdc3; /* base-200 */
+  --primary: #4385be; /* blue-400 */
+  --primary-foreground: #1c1b1a;
+  --secondary: #282726; /* base-900 */
+  --secondary-foreground: #cecdc3;
+  --muted: #282726; /* base-900 */
+  --muted-foreground: #878580; /* base-500 */
+  --accent: #343331; /* base-850 */
+  --accent-foreground: #cecdc3;
+  --additive: #879a39; /* green-400 */
+  --additive-foreground: #1c1b1a;
+  --destructive: #d14d41; /* red-400 */
+  --destructive-foreground: #1c1b1a;
+  --border: #403e3c; /* base-800 */
+  --ring: #4385be; /* blue-400 */
 }
 
 @layer base {
