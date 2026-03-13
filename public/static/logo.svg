@@ -1,16 +1,1 @@
-<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_271_118)">
-<rect width="512" height="74" fill="#CCCCCC"/>
-<rect y="146" width="512" height="74" fill="#CCCCCC"/>
-<rect y="292" width="512" height="74" fill="#CCCCCC"/>
-<rect y="438" width="512" height="74" fill="#CCCCCC"/>
-<rect y="74" width="72" height="72" fill="#CCCCCC"/>
-<rect y="366" width="72" height="72" fill="#CCCCCC"/>
-<rect x="440" y="220" width="72" height="72" fill="#CCCCCC"/>
-</g>
-<defs>
-<clipPath id="clip0_271_118">
-<rect width="512" height="512" fill="white"/>
-</clipPath>
-</defs>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" fill="none" viewBox="0 0 512 512"><g clip-path="url(#clip0_271_118)"><rect width="512" height="74" fill="#CCC"/><rect width="512" height="74" y="146" fill="#CCC"/><rect width="512" height="74" y="292" fill="#CCC"/><rect width="512" height="74" y="438" fill="#CCC"/><rect width="72" height="72" y="74" fill="#CCC"/><rect width="72" height="72" y="366" fill="#CCC"/><rect width="72" height="72" x="440" y="220" fill="#CCC"/></g><defs><clipPath id="clip0_271_118"><rect width="512" height="512" fill="#fff"/></clipPath></defs></svg>
