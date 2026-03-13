@@ -1,0 +1,115 @@
+---
+import AvatarComponent from '@/components/ui/avatar'
+import { Badge } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
+import {
+  getCombinedReadingTime,
+  getSubpostCount,
+  isSubpost,
+  parseAuthors,
+} from '@/lib/data-utils'
+import { formatDate } from '@/lib/utils'
+import { Icon } from 'astro-icon/components'
+import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+import Link from './Link.astro'
+import { Ratings } from './ui/rating'
+import { getReleaseData } from '@/lib/discogs'
+
+interface Props {
+  entry: CollectionEntry<'blog'>
+}
+
+const { entry } = Astro.props
+const formattedDate = formatDate(entry.data.date)
+const readTime = await getCombinedReadingTime(entry.id)
+const authors = await parseAuthors(entry.data.authors ?? [])
+const subpostCount = !isSubpost(entry.id) ? await getSubpostCount(entry.id) : 0
+
+const rating = entry.data.tags?.find((tag) => tag.startsWith('rating-'))
+const discogs = entry.data.discogs ? await getReleaseData(entry.data.discogs) : null;
+---
+
+<div
+  class="hover:bg-secondary/50 rounded-xl border p-4 transition-colors duration-300 ease-in-out"
+>
+  <Link
+    href={`/${entry.collection}/${entry.id}`}
+    class="flex flex-col gap-4 sm:flex-row"
+  >
+    {
+      entry.data.image || (discogs && discogs.images[0]?.resource_url) && (
+        <div class="w-48 max-w-48 sm:shrink-0 h-30">
+          <Image
+            src={entry.data.image || discogs.images[0].resource_url}
+            alt={entry.data.title}
+            width={1200}
+            height={400}
+            class="w-full h-full object-cover rounded-lg"
+          />
+        </div>
+      )
+    }
+
+    <div class="grow">
+      <h3 class="mb-1 text-lg font-medium">{entry.data.title}</h3>
+      <p class="text-muted-foreground mb-2 text-sm">{entry.data.description}</p>
+
+      <div
+        class="text-muted-foreground mb-2 flex flex-wrap items-center gap-x-2 text-xs"
+      >
+        {
+          authors.length > 0 && (
+            <>
+              {authors.map((author) => (
+                <div class="flex items-center gap-x-1.5">
+                  <AvatarComponent
+                    client:load
+                    src={author.avatar}
+                    alt={author.name}
+                    fallback={author.name[0]}
+                    className="size-5 rounded-full"
+                  />
+                  <span>{author.name}</span>
+                </div>
+              ))}
+              <Separator orientation="vertical" className="h-4!" />
+            </>
+          )
+        }
+        <span>{formattedDate}</span>
+        <Separator orientation="vertical" className="h-4!" />
+        <span>{readTime}</span>
+        {
+          subpostCount > 0 && (
+            <>
+              <Separator orientation="vertical" className="h-4!" />
+              <span class="flex items-center gap-1">
+                <Icon name="lucide:file-text" class="size-3" />
+                {subpostCount} subpost{subpostCount === 1 ? '' : 's'}
+              </span>
+            </>
+          )
+        }
+      </div>
+
+      {
+        entry.data.tags && (
+          <div class="flex flex-wrap gap-2 items-center">
+            {rating && <div>
+              <Ratings rating={parseFloat(rating.replace('rating-', ''))} size={15} />
+            </div>}
+            {entry.data.tags.map((tag) => {
+              if (tag.startsWith('rating-')) return null;
+              return (
+              <Badge variant="secondary" className="flex items-center gap-x-1">
+                <Icon name="lucide:hash" class="size-3" />
+                {tag}
+              </Badge>
+            )})}
+          </div>
+        )
+      }
+    </div>
+  </Link>
+</div>

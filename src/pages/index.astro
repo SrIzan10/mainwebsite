@@ -1,40 +1,135 @@
 ---
-import BaseHead from '../components/BaseHead.astro'
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
-import { Image } from 'astro:assets'
-import ImageAuthor from '@/components/ImageAuthor.astro'
-import { FaGithub, FaBlog, FaDiscord, FaMastodon, FaBluesky, FaHeart } from 'react-icons/fa6'
-import { SiOsu } from 'react-icons/si'
-import Background from '../backgrounds.json'
-
-const randomBackground = Background[Math.floor(Math.random() * Background.length)]
+import BentoDiscord from '@/components/BentoDiscord'
+import BentoGithub from '@/components/BentoGithub'
+import BentoSpotify from '@/components/BentoSpotify'
+import BentoWeather from '@/components/BentoWeather'
+import Link from '@/components/Link.astro'
+import PageHead from '@/components/PageHead.astro'
+import { Badge } from '@/components/ui/badge'
+import { Ratings } from '@/components/ui/rating'
+import Layout from '@/layouts/Layout.astro'
+import { getRecentPosts } from '@/lib/data-utils'
+import { Icon } from 'astro-icon/components'
+const allPosts = await getRecentPosts(2)
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    <style>
-      svg {
-        @apply w-6 h-6;
-      }
-    </style>
-  </head>
-  <body class="relative">
-    <div class={`w-screen h-screen z-[-1] bg-fixed bg-center bg-no-repeat bg-cover rounded-none object-cover brightness-[30%]`} style={`background-image: url('${randomBackground.url}')`}></div>
-    <ImageAuthor {...randomBackground} />
-    <div class="w-full h-full sm:w-[480px] sm:h-[360px] absolute -translate-x-2/4 -translate-y-2/4 text-center overflow-visible left-2/4 top-2/4 text-white flex justify-center items-center flex-col gap-5">
-      <Image src="/pfp.webp" alt={'pfp'} width="200" height="200" class="rounded-full" loading="eager" />
-      <p>Hobbyist developer & <a href={'https://sern.dev'}>sern</a> lead developer team member</p>
-      <div class="flex gap-5 justify-center">
-        <a href="https://github.com/SrIzan10" aria-label="github"><FaGithub /></a>
-        <a href="https://blog.srizan.dev" aria-label="blog"><FaBlog /></a>
-        <a href="https://discord.com/users/703974042700611634" aria-label="discord"><FaDiscord /></a>
-        <a href="https://social.kalico.moe/@srizan" aria-label="mastodon"><FaMastodon /></a>
-        <a href="https://bsky.app/profile/srizan.dev" aria-label="twitter"><FaBluesky /></a>
-        <a href="https://osu.ppy.sh/users/25350735" aria-label="osu!"><SiOsu /></a>
-        <a href="https://github.com/sponsors/SrIzan10" aria-label="sponsor" class="hover:!text-red-600"><FaHeart /></a>
+<Layout>
+  <PageHead slot="head" title="Home" />
+  <section class="p-4">
+    <div
+      class="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:aspect-[4/3] lg:grid-cols-3 lg:grid-rows-3"
+    >
+      <div
+        class="bento-item relative flex flex-col items-center justify-center rounded-lg border p-2 *:text-center md:col-span-2 lg:col-span-2"
+      >
+        <img
+          src="https://res.cloudinary.com/mainwebsite/image/upload/v1703593035/bg/Playa_de_Santa_Marina_ae389j.jpg"
+          class="absolute inset-0 h-full w-full rounded-lg object-cover opacity-20"
+        />
+        <img
+          src="https://github.com/SrIzan10.png"
+          class="relative z-10 mb-2 h-24 w-24 rounded-full"
+        />
+        <p class="relative z-10">Hi! I'm Izan, a student from Málaga, Spain</p>
+        <p class="relative z-10">
+          I mainly do open source work at <Link
+            href="https://sern.dev"
+            external
+            underline>sern</Link
+          > and <Link href="https://hackclub.com" external underline
+            >Hack Club</Link
+          >.
+        </p>
+        <p class="relative z-10">
+          In my free time, I enjoy coding, reading and learning languages.
+        </p>
+      </div>
+
+      <!-- Spotify -->
+      <div class="bento-item rounded-lg border h-full">
+        <BentoSpotify client:load />
+      </div>
+
+      <!-- Blog -->
+      <div
+        class="bento-item from-primary/5 to-primary/10 rounded-lg border bg-gradient-to-br p-4 md:col-span-2 lg:col-span-2"
+      >
+        <div class="mb-4 flex items-center justify-between">
+          <h2 class="text-foreground text-lg font-semibold">Latest Posts</h2>
+          <Link
+            href="/blog"
+            class="text-muted-foreground hover:text-foreground text-sm transition-colors"
+            >View all →</Link
+          >
+        </div>
+        <div class="space-y-3">
+          {
+            allPosts.map((post) => {
+              const rating = post.data.tags?.find((tag) =>
+                tag.startsWith('rating-')
+              )
+              return (
+                <div class="group">
+                  <Link
+                    href={`/blog/${post.id}`}
+                    class="bg-background/50 hover:bg-background/80 border-border/50 hover:border-border block rounded-md border p-3 transition-all duration-200 hover:shadow-sm"
+                  >
+                    <div class="flex">
+                      <h3 class="text-foreground group-hover:text-primary line-clamp-1 font-medium transition-colors">
+                        {post.data.title}
+                      </h3>
+                      <div class="flex-1" />
+                      {post.data.tags && (
+                        <div class="hidden flex-wrap gap-2 sm:flex">
+                          {rating && (
+                            <Ratings
+                              rating={parseFloat(rating.replace('rating-', ''))}
+                              size={15}
+                            />
+                          )}
+
+                          {post.data.tags.map((tag) => {
+                            if (tag.startsWith('rating-')) return null
+                            return (
+                              <Badge
+                                variant="secondary"
+                                className="flex items-center gap-x-1"
+                              >
+                                <Icon name="lucide:hash" class="size-3" />
+                                {tag}
+                              </Badge>
+                            )
+                          })}
+                        </div>
+                      )}
+                    </div>
+                    {post.data.description && (
+                      <p class="text-muted-foreground mt-1 line-clamp-2 text-sm">
+                        {post.data.description}
+                      </p>
+                    )}
+                  </Link>
+                </div>
+              )
+            })
+          }
+        </div>
+      </div>
+
+      <!-- Weather -->
+      <div class="bento-item rounded-lg border h-full">
+        <BentoWeather client:load />
+      </div>
+
+      <!-- Discord -->
+      <div class="bento-item rounded-lg border h-full">
+        <BentoDiscord client:load />
+      </div>
+
+      <!-- GitHub -->
+      <div class="bento-item rounded-lg border h-full lg:col-span-2">
+        <BentoGithub client:load />
       </div>
     </div>
-  </body>
-</html>
+  </section>
+</Layout>

