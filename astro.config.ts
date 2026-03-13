@@ -19,10 +19,10 @@ import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
 
 import tailwindcss from '@tailwindcss/vite'
 
-import cloudflare from '@astrojs/cloudflare';
+import cloudflare from '@astrojs/cloudflare'
 
 export default defineConfig({
-  site: 'https://astro-erudite.vercel.app',
+  site: 'https://srizan.dev',
 
   integrations: [
     expressiveCode({
@@ -77,9 +77,11 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     resolve: {
-      alias: import.meta.env.PROD ? {
-        "react-dom/server": "react-dom/server.edge",
-      } : undefined,
+      alias: import.meta.env.PROD
+        ? {
+            'react-dom/server': 'react-dom/server.edge',
+          }
+        : undefined,
     },
   },
 
@@ -128,3 +130,4 @@ export default defineConfig({
   }),
   output: 'server',
 })
+
