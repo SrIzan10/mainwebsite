@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">THROUGHPUT: Prisma Next versus Drizzle</title>
+  <desc id="desc">Higher values are better. 5 database scenarios compared.</desc>
+  <defs><pattern id="grid" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M16 0H0V16" fill="none" stroke="#e6e4d9" stroke-width="1"/></pattern></defs>
+  <rect width="100%" height="100%" fill="#fffcf0"/><rect x="32" y="32" width="1136" height="836" fill="url(#grid)" stroke="#100f0f" stroke-width="2"/>
+  <style>.title{font:700 34px Georgia,serif;letter-spacing:2px}.kicker,.legend,.value{font:600 16px ui-monospace,monospace}.kicker{fill:#6f6e69;letter-spacing:3px}.scenario{font:700 18px Georgia,serif}.value{fill:#100f0f}.note{font:14px Georgia,serif;fill:#6f6e69}</style>
+  <text x="64" y="85" class="kicker">NOVARUM / ORM MIGRATION</text><text x="64" y="123" class="title">THROUGHPUT</text><rect x="64" y="142" width="18" height="18" rx="2" fill="#d14d41"/><text x="92" y="157" class="legend">Prisma Next latest</text><rect x="374" y="142" width="18" height="18" rx="2" fill="#ad8301"/><text x="402" y="157" class="legend">Drizzle ^1.0.0-rc.4</text><text x="64" y="241" class="scenario">User by primary key</text><rect x="390" y="210" width="317.7237607220773" height="24" rx="3" fill="#d14d41"/>
+            <text x="719.7237607220773" y="228" class="value">4999.8 ops/s</text><rect x="390" y="246" width="460.6683433524851" height="24" rx="3" fill="#ad8301"/>
+            <text x="862.6683433524852" y="264" class="value">7249.3 ops/s</text><text x="64" y="359" class="scenario">Membership by compound key</text><rect x="390" y="328" width="395.00265705602965" height="24" rx="3" fill="#d14d41"/>
+            <text x="797.0026570560296" y="346" class="value">6215.9 ops/s</text><rect x="390" y="364" width="720" height="24" rx="3" fill="#ad8301"/>
+            <text x="1122" y="382" class="value">11330.2 ops/s</text><text x="64" y="477" class="scenario">100 messages + relations</text><rect x="390" y="446" width="27.593064609583237" height="24" rx="3" fill="#d14d41"/>
+            <text x="429.5930646095832" y="464" class="value">434.2 ops/s</text><rect x="390" y="482" width="80.60573416711038" height="24" rx="3" fill="#ad8301"/>
+            <text x="482.60573416711037" y="500" class="value">1268.4 ops/s</text><text x="64" y="595" class="scenario">Insert message</text><rect x="390" y="564" width="55.53685590734128" height="24" rx="3" fill="#d14d41"/>
+            <text x="457.5368559073413" y="582" class="value">873.9 ops/s</text><rect x="390" y="600" width="159.6152060248346" height="24" rx="3" fill="#ad8301"/>
+            <text x="561.6152060248346" y="618" class="value">2511.8 ops/s</text><text x="64" y="713" class="scenario">Update user</text><rect x="390" y="682" width="28.245472756911656" height="24" rx="3" fill="#d14d41"/>
+            <text x="430.2454727569117" y="700" class="value">444.5 ops/s</text><rect x="390" y="718" width="39.5861264726505" height="24" rx="3" fill="#ad8301"/>
+            <text x="441.5861264726505" y="736" class="value">622.9 ops/s</text>
+  <text x="64" y="845" class="note">Higher is better / 200 latency samples / concurrency 10 / Bun 1.4.0</text>
+</svg>

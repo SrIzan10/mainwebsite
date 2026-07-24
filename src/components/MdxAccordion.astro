@@ -1,0 +1,24 @@
+---
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  title: string
+  defaultOpen?: boolean
+  class?: string
+}
+
+const { title, defaultOpen = false, class: className, ...props } = Astro.props
+---
+
+<details class:list={['group my-6 border-b', className]} open={defaultOpen} {...props}>
+  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left text-sm font-medium transition-all hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden">
+    {title}
+    <Icon
+      name="lucide:chevron-down"
+      class="size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180"
+    />
+  </summary>
+  <div class="pb-4 text-sm [&>:first-child]:mt-0 [&>:last-child]:mb-0">
+    <slot />
+  </div>
+</details>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">P95 LATENCY: Prisma Next versus Drizzle</title>
+  <desc id="desc">Lower values are better. 5 database scenarios compared.</desc>
+  <defs><pattern id="grid" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M16 0H0V16" fill="none" stroke="#e6e4d9" stroke-width="1"/></pattern></defs>
+  <rect width="100%" height="100%" fill="#fffcf0"/><rect x="32" y="32" width="1136" height="836" fill="url(#grid)" stroke="#100f0f" stroke-width="2"/>
+  <style>.title{font:700 34px Georgia,serif;letter-spacing:2px}.kicker,.legend,.value{font:600 16px ui-monospace,monospace}.kicker{fill:#6f6e69;letter-spacing:3px}.scenario{font:700 18px Georgia,serif}.value{fill:#100f0f}.note{font:14px Georgia,serif;fill:#6f6e69}</style>
+  <text x="64" y="85" class="kicker">NOVARUM / ORM MIGRATION</text><text x="64" y="123" class="title">P95 LATENCY</text><rect x="64" y="142" width="18" height="18" rx="2" fill="#d14d41"/><text x="92" y="157" class="legend">Prisma Next latest</text><rect x="374" y="142" width="18" height="18" rx="2" fill="#ad8301"/><text x="402" y="157" class="legend">Drizzle ^1.0.0-rc.4</text><text x="64" y="241" class="scenario">User by primary key</text><rect x="390" y="210" width="17.739848579157165" height="24" rx="3" fill="#d14d41"/>
+            <text x="419.7398485791572" y="228" class="value">0.49 ms</text><rect x="390" y="246" width="14.210991349047292" height="24" rx="3" fill="#ad8301"/>
+            <text x="416.2109913490473" y="264" class="value">0.39 ms</text><text x="64" y="359" class="scenario">Membership by compound key</text><rect x="390" y="328" width="15.609845694299207" height="24" rx="3" fill="#d14d41"/>
+            <text x="417.6098456942992" y="346" class="value">0.43 ms</text><rect x="390" y="364" width="8.769074966474088" height="24" rx="3" fill="#ad8301"/>
+            <text x="410.7690749664741" y="382" class="value">0.24 ms</text><text x="64" y="477" class="scenario">100 messages + relations</text><rect x="390" y="446" width="186.63899965840386" height="24" rx="3" fill="#d14d41"/>
+            <text x="588.6389996584039" y="464" class="value">5.15 ms</text><rect x="390" y="482" width="73.59234019918799" height="24" rx="3" fill="#ad8301"/>
+            <text x="475.592340199188" y="500" class="value">2.03 ms</text><text x="64" y="595" class="scenario">Insert message</text><rect x="390" y="564" width="720" height="24" rx="3" fill="#d14d41"/>
+            <text x="1122" y="582" class="value">19.9 ms</text><rect x="390" y="600" width="63.78869964524697" height="24" rx="3" fill="#ad8301"/>
+            <text x="465.788699645247" y="618" class="value">1.76 ms</text><text x="64" y="713" class="scenario">Update user</text><rect x="390" y="682" width="249.61112758515665" height="24" rx="3" fill="#d14d41"/>
+            <text x="651.6111275851566" y="700" class="value">6.89 ms</text><rect x="390" y="718" width="67.84769478927058" height="24" rx="3" fill="#ad8301"/>
+            <text x="469.8476947892706" y="736" class="value">1.87 ms</text>
+  <text x="64" y="845" class="note">Lower is better / 200 latency samples / concurrency 10 / Bun 1.4.0</text>
+</svg>
