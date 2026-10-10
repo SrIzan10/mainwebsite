@@ -1,5 +1,5 @@
 ---
-name: 'sern Project'
+name: 'sern'
 description: 'Discord bot framework.'
 tags: ['TypeScript', 'rxjs', 'Discord.js', 'Starlight']
 image: '../../../public/static/sern-banner.png'

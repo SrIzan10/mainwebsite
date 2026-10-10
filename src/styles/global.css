@@ -100,3 +100,38 @@
     @apply border-border outline-ring/50 tracking-tight;
   }
 }
+
+@theme {
+  --ease-fluid: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Scroll reveal: only hide content when JS can reveal it again */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(4rem);
+    transition:
+      opacity 900ms var(--ease-fluid),
+      filter 900ms var(--ease-fluid),
+      transform 900ms var(--ease-fluid);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal][data-revealed] {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+  }
+}
+
+@media (scripting: enabled) {
+  [data-tagline-word] {
+    opacity: 0.3;
+    transition: opacity 700ms var(--ease-fluid);
+  }
+
+  [data-tagline-word][data-lit] {
+    opacity: 1;
+  }
+}
